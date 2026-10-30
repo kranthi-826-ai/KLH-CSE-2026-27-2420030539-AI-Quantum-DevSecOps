@@ -1,0 +1,1301 @@
+{
+  "scope": "Real routed Gateway/Auth controlled lab; complete frozen negative result and independent controls; not production accuracy.",
+  "manifest": {
+    "run_id": "microservice-sessions-57730b6194094a29ad42b0027c7a179d",
+    "created_utc": "2026-10-19T15:20:06.242009+00:00",
+    "seed": 20261019,
+    "scenarios": [
+      "normal_use",
+      "normal_mistakes",
+      "legitimate_burst",
+      "credential_guessing",
+      "invalid_token_burst",
+      "missing_token_burst"
+    ],
+    "split_blocks": {
+      "train": 6,
+      "calibration": 2,
+      "test": 2
+    },
+    "feature_columns": [
+      "is_login",
+      "is_identity_read",
+      "has_bearer",
+      "has_history",
+      "prior_requests_1s",
+      "prior_requests_5s",
+      "prior_401_5s",
+      "prior_failed_login_5s",
+      "seconds_since_previous_start"
+    ],
+    "requests_per_session": [
+      12,
+      20
+    ],
+    "split_protocol": "Chronological collection phases; disjoint ephemeral accounts/sessions. No session enters multiple partitions.",
+    "identity_scope": "Gateway records are joined using server-generated observation IDs; source peer is never a caller header.",
+    "target": "Controlled scenario intent, not HTTP outcome. Normal mistakes and legitimate bursts have target 0.",
+    "label_mapping": {
+      "normal_use": 0,
+      "normal_mistakes": 0,
+      "legitimate_burst": 0,
+      "credential_guessing": 1,
+      "invalid_token_burst": 1,
+      "missing_token_burst": 1
+    },
+    "maximum_http_requests": 1320,
+    "maximum_elapsed_seconds": 210,
+    "source_hashes": {
+      "collect_microservice_sessions.py": "5ff9e6078d761dfd5c1c77753b81e6cd0f38b7f3914e36282a07c89cbe142e8c",
+      "microservice_session_features.py": "9590c29f55423444ff12592f1c04d9c074189757ff64cb5300c0ec03495cb736",
+      "collect_microservice_lab.py": "22488f3480eedb34830e302c0f973b3d1db266f7b7ef87c7c1cab1cbeaf9d6f1"
+    },
+    "python": "3.14.6",
+    "production_traffic": false,
+    "scope": "Real Gateway-to-Auth HTTP/H2, seven actual loopback connection peers; monitoring publisher stubbed.",
+    "excluded_predictors": [
+      "scenario",
+      "target",
+      "session_id",
+      "split",
+      "sequence",
+      "status",
+      "duration_ms",
+      "expected_status"
+    ],
+    "feature_source": "Actual gateway pre-request peer history, not client history.",
+    "peer_split": "Three training peers, two calibration peers, two final-test peers; disjoint across partitions.",
+    "status": "complete",
+    "splits": {
+      "train": {
+        "rows": 557,
+        "sessions": [
+          {
+            "session_id": "4d8e853e134f4f448d16613f38e26be2",
+            "scenario": "missing_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "0f002615093e4c9b85f3bb2a1d3fc63e",
+            "scenario": "normal_mistakes",
+            "requests": 17
+          },
+          {
+            "session_id": "ab5c38991827411f87bd8816082c5465",
+            "scenario": "credential_guessing",
+            "requests": 16
+          },
+          {
+            "session_id": "043856c6cea442a391b64ae09ad9597a",
+            "scenario": "normal_use",
+            "requests": 15
+          },
+          {
+            "session_id": "e5957848216f41aba1def73d29e8c3b5",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "bd1bc2dbd7bb4044b35f9f54e3e69840",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "ae9f6967dd8345cab548bc5e2820bd7d",
+            "scenario": "missing_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "ffc84d104803456e8f83075bf9e671ae",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "ecfe1a9ad1604a5c8c5acd884ffbfe74",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "29818c4294144913901aac8585ecc465",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "99849914c69649f68752670d738a5d76",
+            "scenario": "normal_mistakes",
+            "requests": 12
+          },
+          {
+            "session_id": "b0206d1a4eb0413899bbd255696c10a9",
+            "scenario": "credential_guessing",
+            "requests": 19
+          },
+          {
+            "session_id": "b159fe66a3e643ae98f4819d299a3f24",
+            "scenario": "credential_guessing",
+            "requests": 12
+          },
+          {
+            "session_id": "670579f87d1943339b6ad2f6efec290c",
+            "scenario": "normal_mistakes",
+            "requests": 19
+          },
+          {
+            "session_id": "cf17ca6fc9e647969b39b056fec850db",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "006d86f1749e4eba90db647f19212642",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "0d6c42e3e1814c33a1c3b51f48812501",
+            "scenario": "normal_use",
+            "requests": 12
+          },
+          {
+            "session_id": "b3f57e7d385f44cf91eaaa30d3e19eb2",
+            "scenario": "missing_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "709e96ebbf8f46cd87c0ab1e2ee75456",
+            "scenario": "legitimate_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "889d1b7fb46746698cc739bbeb9db475",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "2c305f702345408ca0792d7d3fb72867",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "634e1fd26b864c859f35b05f105b84f4",
+            "scenario": "normal_mistakes",
+            "requests": 15
+          },
+          {
+            "session_id": "76dfa8f03e0141a3a231fce7794e26a4",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "2493e4d9959b43f0ba50d7ed8936e936",
+            "scenario": "missing_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "03e7c07354a14a558aa79904077b1928",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          },
+          {
+            "session_id": "e59415bf119b44a09a5b17cb4b3cf17f",
+            "scenario": "missing_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "15c2aa07957f446b8c931e3bf25b588e",
+            "scenario": "normal_use",
+            "requests": 20
+          },
+          {
+            "session_id": "e65841ef7ca54f52b38a44170727c819",
+            "scenario": "legitimate_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "251dfdeec5974f60a7328f548ea6b69f",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "eb09fc19ada94451b41fc8f7a9bfd445",
+            "scenario": "credential_guessing",
+            "requests": 17
+          },
+          {
+            "session_id": "97e6bff24d00490c8cbf33d918bdcb3b",
+            "scenario": "legitimate_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "6c14a780a8a748fda1abb4ac77489f4e",
+            "scenario": "missing_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "ae4ce9a7466d44ceb2faafd35a43a808",
+            "scenario": "normal_mistakes",
+            "requests": 15
+          },
+          {
+            "session_id": "6ea870162b6c40898c82764e298054d4",
+            "scenario": "normal_use",
+            "requests": 17
+          },
+          {
+            "session_id": "20d1afe32323404e96f70053c6340ea2",
+            "scenario": "credential_guessing",
+            "requests": 15
+          },
+          {
+            "session_id": "0c9051ddf60340628009ad1d6104af68",
+            "scenario": "invalid_token_burst",
+            "requests": 18
+          }
+        ],
+        "sha256": "8bdd59d44712bc95550080d73e6710dbb5ed33063c63cfa1ccb30af7c3d1074c",
+        "peer_ids": [
+          "092c5b71-f5aa-43d5-a748-7eb2c7fa1162",
+          "867c2bc5-0781-4ba7-b013-efb37c5eca86",
+          "fe4fede7-5b5b-4d10-9353-4f2598d32754"
+        ]
+      },
+      "calibration": {
+        "rows": 185,
+        "sessions": [
+          {
+            "session_id": "57aae3e36c2746efa48bb28ca812ec0d",
+            "scenario": "invalid_token_burst",
+            "requests": 16
+          },
+          {
+            "session_id": "302b2ab89c89498c8da03978b9d37f9c",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "53f7d6c170084916a299b06e7c3e9640",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "165e6aced6a44f7793f63de394c5e235",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "1a41e1a9cb254e1d8e2af01f3a7dcc0f",
+            "scenario": "normal_mistakes",
+            "requests": 14
+          },
+          {
+            "session_id": "3307ff767b164c189d134deb3ec018d2",
+            "scenario": "missing_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "ada32d379fce4128b23be15d3933bf18",
+            "scenario": "normal_use",
+            "requests": 15
+          },
+          {
+            "session_id": "0a8f0f9769084f35a14446e082969db0",
+            "scenario": "missing_token_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "76ac8346f946495fba5827389b5356e6",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "792e466407a3406380740a1c6b947b21",
+            "scenario": "credential_guessing",
+            "requests": 15
+          },
+          {
+            "session_id": "0eec0b6def4142e1bf971d65f745f9f4",
+            "scenario": "invalid_token_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "c858df26cadc4fa5a3a8dfb661510e60",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          }
+        ],
+        "sha256": "8f61dee492e0604e280786d302d83d9072dff7afe02e522572a429d1386053a0",
+        "peer_ids": [
+          "037d1f90-1b5c-4b3e-8a8c-e00c046e7aca",
+          "5f7c2433-ee79-47fb-9e6f-5a80a9126e47"
+        ]
+      },
+      "test": {
+        "rows": 194,
+        "sessions": [
+          {
+            "session_id": "1f6b3956c2b74dec908e11def49a41c5",
+            "scenario": "normal_mistakes",
+            "requests": 19
+          },
+          {
+            "session_id": "e2e41788d5bd4ba3b666063f0a8370f9",
+            "scenario": "invalid_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "5ed257f31fa54fb09955cd772d000fd0",
+            "scenario": "missing_token_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "c05675e6ebdd4a21a5d3f715ce9eaccd",
+            "scenario": "legitimate_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "01791eb0b24a421c83e9194ecb6593bb",
+            "scenario": "normal_use",
+            "requests": 14
+          },
+          {
+            "session_id": "f293b43fea514ea2aee1f2c6d6059e79",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "91aeaddea70f4b5d9eadf3c6d446b302",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "00cee0b499ba43e7967c440c68779bb1",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "65c5aa7fd1dc4ac0bafc5b3badea9d3a",
+            "scenario": "normal_use",
+            "requests": 16
+          },
+          {
+            "session_id": "4ea08052e4c146aeaf8e29980ecdd78e",
+            "scenario": "credential_guessing",
+            "requests": 19
+          },
+          {
+            "session_id": "09aefc506c9a4015be0f24b6c798504f",
+            "scenario": "normal_mistakes",
+            "requests": 20
+          },
+          {
+            "session_id": "2161bbfe47524917a253894874eb4041",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          }
+        ],
+        "sha256": "e916d30ebb4ce926272e4fb4d4ca3198b5d5f52e4d653e94e71fc7d6ff8d453a",
+        "peer_ids": [
+          "9227e911-0354-43b9-9d64-db1c455d1706",
+          "cf8b8fbb-16bd-4f40-9d32-89d37bd8779a"
+        ]
+      }
+    },
+    "setup_http_requests": 120,
+    "elapsed_seconds": 62.169477300001745,
+    "total_http_requests": 1056,
+    "retained_secrets": false,
+    "model_evaluated": false,
+    "raw_manifest_sha256": "342a0f682c7fee8fbc494afed99179900b35dac3c4d462ca96a94c3b3ee235a3",
+    "gateway_log_sha256": "a68d050d4a7f50fc6e6afb6be10cfc8a829187e2480cfb7bd76924a2daf2bf40",
+    "preparation_sha256": "3a535c8d3c60a5567d05e6c8b9b4f053a22a882a4fb3ab20e7f978fdd0c28fa8",
+    "unique_transport_peers": 7,
+    "joined_study_observations": 936,
+    "gateway_observations_including_setup": 996,
+    "cv_group": "trusted_peer_id",
+    "automatic_response_enabled": false
+  },
+  "frozen": {
+    "created_utc": "2026-10-19T15:21:56.856409+00:00",
+    "run_id": "microservice-sessions-routed-v1",
+    "recipes": {
+      "logistic": {
+        "C": 1,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "random_forest": {
+        "n_estimators": 128,
+        "max_depth": 6,
+        "min_samples_leaf": 3,
+        "class_weight": "balanced",
+        "n_jobs": 4
+      }
+    },
+    "feature_columns": [
+      "is_login",
+      "is_identity_read",
+      "has_bearer",
+      "has_history",
+      "prior_requests_1s",
+      "prior_requests_5s",
+      "prior_401_5s",
+      "prior_failed_login_5s",
+      "seconds_since_previous_start"
+    ],
+    "seed": 20261019,
+    "script_sha256": "c7456a6608d42f1622f494ee7e7777ed56ee82b36133713afb6e6cc26675404a",
+    "helper_hashes": {
+      "train_microservice_sessions.py": "a99d2c9fe2bc7bc701b6beacd60ade16097f26b4c043a1edfe26e4eab2ea3ed5",
+      "train_ciciot2023_pilot.py": "b4e4b6ae84953a7df936f92fef8d03d2ffc7e5a7a9dfa36ad9eef2d1f956e380",
+      "evaluate_microservice_sessions.py": "bc429aa3bdd0915341e40f6c9dfc1d92d03e7915e8433c50e4e2cc6fd574688d"
+    },
+    "manifest_sha256": "c6202b3d91715163595f105dc67b42043ce05495be255b0597f01bc0fdae4618",
+    "reference_model_sha256": "294f310e7bafe7cf9e023a57a7530dde08745cdf7b41f92fac9cd34bd09d0703",
+    "reference_frozen_sha256": "585c10152c7c6743981b1d0ead40aea2393e8f6490e8be33c0b66d79b516e779",
+    "selection": "Leave-one-transport-peer-out training CV across three peers; mean macro-F1; separate calibration; freeze before final peer holdout.",
+    "gates": "Calibration and final point estimates: recall >=95%, FPR <=5%. Never automatic deployment.",
+    "test": "Two unseen transport peers, one frozen evaluation; compare paired old per-account model and a predeclared history rule.",
+    "intervals": "500 cluster bootstrap replicates by transport peer. Only two final peers: intervals are descriptive, not reliable population uncertainty.",
+    "environment": {
+      "python": "3.14.6",
+      "numpy": "2.5.3",
+      "sklearn": "1.9.1"
+    },
+    "automatic_response_enabled": false,
+    "production_accuracy_claim": false,
+    "cv": {
+      "logistic": {
+        "folds": [
+          {
+            "threshold": 0.5,
+            "samples": 189,
+            "accuracy": 0.8412698412698413,
+            "balanced_accuracy": 0.8358585858585859,
+            "macro_precision": 0.8592436974789917,
+            "macro_f1": 0.8374426605504588,
+            "attack_recall": 0.9494949494949495,
+            "attack_precision": 0.7899159663865546,
+            "false_positive_rate": 0.2777777777777778,
+            "roc_auc": 0.879685746352413,
+            "pr_auc": 0.8574265990437806,
+            "confusion_matrix": [
+              [
+                65,
+                25
+              ],
+              [
+                5,
+                94
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 188,
+            "accuracy": 0.7872340425531915,
+            "balanced_accuracy": 0.7846380423700012,
+            "macro_precision": 0.793962793962794,
+            "macro_f1": 0.7847985347985348,
+            "attack_recall": 0.865979381443299,
+            "attack_precision": 0.7567567567567568,
+            "false_positive_rate": 0.2967032967032967,
+            "roc_auc": 0.9037045428798005,
+            "pr_auc": 0.9091210723315954,
+            "confusion_matrix": [
+              [
+                64,
+                27
+              ],
+              [
+                13,
+                84
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 180,
+            "accuracy": 0.8333333333333334,
+            "balanced_accuracy": 0.8328188665267318,
+            "macro_precision": 0.8361391694725028,
+            "macro_f1": 0.8328173374613003,
+            "attack_recall": 0.7865168539325843,
+            "attack_precision": 0.8641975308641975,
+            "false_positive_rate": 0.12087912087912088,
+            "roc_auc": 0.9006050129645635,
+            "pr_auc": 0.8738332398148339,
+            "confusion_matrix": [
+              [
+                80,
+                11
+              ],
+              [
+                19,
+                70
+              ]
+            ]
+          }
+        ],
+        "mean_macro_f1": 0.8183528442700979
+      },
+      "random_forest": {
+        "folds": [
+          {
+            "threshold": 0.5,
+            "samples": 189,
+            "accuracy": 0.873015873015873,
+            "balanced_accuracy": 0.8676767676767676,
+            "macro_precision": 0.8932773109243697,
+            "macro_f1": 0.8699541284403669,
+            "attack_recall": 0.9797979797979798,
+            "attack_precision": 0.8151260504201681,
+            "false_positive_rate": 0.24444444444444444,
+            "roc_auc": 0.9356902356902357,
+            "pr_auc": 0.9419906165800054,
+            "confusion_matrix": [
+              [
+                68,
+                22
+              ],
+              [
+                2,
+                97
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 188,
+            "accuracy": 0.8138297872340425,
+            "balanced_accuracy": 0.8127903024810241,
+            "macro_precision": 0.8147514819881441,
+            "macro_f1": 0.8131902450103625,
+            "attack_recall": 0.845360824742268,
+            "attack_precision": 0.803921568627451,
+            "false_positive_rate": 0.21978021978021978,
+            "roc_auc": 0.8977002379064235,
+            "pr_auc": 0.897632468602635,
+            "confusion_matrix": [
+              [
+                71,
+                20
+              ],
+              [
+                15,
+                82
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 180,
+            "accuracy": 0.7666666666666667,
+            "balanced_accuracy": 0.7650327200888998,
+            "macro_precision": 0.7912087912087913,
+            "macro_f1": 0.7608805668016194,
+            "attack_recall": 0.6179775280898876,
+            "attack_precision": 0.873015873015873,
+            "false_positive_rate": 0.08791208791208792,
+            "roc_auc": 0.9036918138041733,
+            "pr_auc": 0.9017668277472047,
+            "confusion_matrix": [
+              [
+                83,
+                8
+              ],
+              [
+                34,
+                55
+              ]
+            ]
+          }
+        ],
+        "mean_macro_f1": 0.8146749800841162
+      }
+    },
+    "reserved_test_loaded": false,
+    "selected_model": "logistic",
+    "calibration": {
+      "threshold": 0.9250000000000004,
+      "samples": 185,
+      "accuracy": 0.654054054054054,
+      "balanced_accuracy": 0.6420880149812734,
+      "macro_precision": 0.7420255183413078,
+      "macro_f1": 0.6086726599682708,
+      "attack_recall": 0.3258426966292135,
+      "attack_precision": 0.8787878787878788,
+      "false_positive_rate": 0.041666666666666664,
+      "roc_auc": 0.8071161048689139,
+      "pr_auc": 0.8173869505709408,
+      "confusion_matrix": [
+        [
+          92,
+          4
+        ],
+        [
+          60,
+          29
+        ]
+      ]
+    },
+    "calibration_eligible": false,
+    "model_sha256": "06a1726d028ef74254fa8a97c452770164fb59dc05a5db173c852ed5ed414696",
+    "training_rows": 557
+  },
+  "final_test": {
+    "run_id": "microservice-sessions-routed-v1",
+    "frozen_sha256": "784c446cee918d36065f0535ebb0f556b5bc6853f65fa5096fa6c93041fec421",
+    "test_rows": 194,
+    "test_sessions": 12,
+    "unseen_transport_peers": 2,
+    "results": {
+      "routed_candidate": {
+        "metrics": {
+          "threshold": 0.9250000000000004,
+          "samples": 194,
+          "accuracy": 0.6443298969072165,
+          "balanced_accuracy": 0.6443298969072164,
+          "macro_precision": 0.7619598765432098,
+          "macro_f1": 0.5993535063302505,
+          "attack_recall": 0.30927835051546393,
+          "attack_precision": 0.9375,
+          "false_positive_rate": 0.020618556701030927,
+          "roc_auc": 0.8636411946009139,
+          "pr_auc": 0.8670941674204913,
+          "confusion_matrix": [
+            [
+              95,
+              2
+            ],
+            [
+              67,
+              30
+            ]
+          ]
+        },
+        "peer_cluster_intervals": {
+          "accuracy": {
+            "lower": 0.6138613861386139,
+            "upper": 0.6774193548387096,
+            "valid_replicates": 500
+          },
+          "attack_recall": {
+            "lower": 0.24,
+            "upper": 0.3829787234042553,
+            "valid_replicates": 500
+          },
+          "false_positive_rate": {
+            "lower": 0.0196078431372549,
+            "upper": 0.021739130434782608,
+            "valid_replicates": 500
+          }
+        },
+        "by_scenario": {
+          "credential_guessing": {
+            "samples": 33,
+            "alert_rate": 0
+          },
+          "invalid_token_burst": {
+            "samples": 27,
+            "alert_rate": 0
+          },
+          "legitimate_burst": {
+            "samples": 28,
+            "alert_rate": 0
+          },
+          "missing_token_burst": {
+            "samples": 37,
+            "alert_rate": 0.8108108108108109
+          },
+          "normal_mistakes": {
+            "samples": 39,
+            "alert_rate": 0.02564102564102564
+          },
+          "normal_use": {
+            "samples": 30,
+            "alert_rate": 0.03333333333333333
+          }
+        }
+      },
+      "per_account_reference": {
+        "metrics": {
+          "threshold": 0.5500000000000003,
+          "samples": 194,
+          "accuracy": 0.5824742268041238,
+          "balanced_accuracy": 0.5824742268041238,
+          "macro_precision": 0.7050739957716702,
+          "macro_f1": 0.5091062447283746,
+          "attack_recall": 0.9690721649484536,
+          "attack_precision": 0.5465116279069767,
+          "false_positive_rate": 0.8041237113402062,
+          "roc_auc": 0.8935593580614305,
+          "pr_auc": 0.9118562486546542,
+          "confusion_matrix": [
+            [
+              19,
+              78
+            ],
+            [
+              3,
+              94
+            ]
+          ]
+        },
+        "peer_cluster_intervals": {
+          "accuracy": {
+            "lower": 0.4752475247524752,
+            "upper": 0.6989247311827957,
+            "valid_replicates": 500
+          },
+          "attack_recall": {
+            "lower": 0.96,
+            "upper": 0.9787234042553191,
+            "valid_replicates": 500
+          },
+          "false_positive_rate": {
+            "lower": 0.5869565217391305,
+            "upper": 1,
+            "valid_replicates": 500
+          }
+        },
+        "by_scenario": {
+          "credential_guessing": {
+            "samples": 33,
+            "alert_rate": 1
+          },
+          "invalid_token_burst": {
+            "samples": 27,
+            "alert_rate": 0.9629629629629629
+          },
+          "legitimate_burst": {
+            "samples": 28,
+            "alert_rate": 1
+          },
+          "missing_token_burst": {
+            "samples": 37,
+            "alert_rate": 0.9459459459459459
+          },
+          "normal_mistakes": {
+            "samples": 39,
+            "alert_rate": 0.5128205128205128
+          },
+          "normal_use": {
+            "samples": 30,
+            "alert_rate": 1
+          }
+        }
+      },
+      "history_rule": {
+        "metrics": {
+          "threshold": 0.5,
+          "samples": 194,
+          "accuracy": 0.5721649484536082,
+          "balanced_accuracy": 0.5721649484536082,
+          "macro_precision": 0.6664215686274509,
+          "macro_f1": 0.5015940817779428,
+          "attack_recall": 0.9484536082474226,
+          "attack_precision": 0.5411764705882353,
+          "false_positive_rate": 0.8041237113402062,
+          "roc_auc": 0.5721649484536082,
+          "pr_auc": 0.5390539721043056,
+          "confusion_matrix": [
+            [
+              19,
+              78
+            ],
+            [
+              5,
+              92
+            ]
+          ]
+        }
+      }
+    },
+    "lab_gates_pass": false,
+    "promoted": false,
+    "automatic_response_enabled": false,
+    "reserved_test_loaded": true,
+    "scope": "Real routed local HTTP, real authentication/H2; controlled intent scenarios, not production accuracy.",
+    "limitations": [
+      "Only seven collection peers and two final peers, one host/run/generator.",
+      "Expanded lab limiter settings isolate detection from gateway blocking; default limiter is checked separately.",
+      "No successful exploitation, DDoS saturation, MySQL or Business Service/PQC measured in this dataset.",
+      "No claims of beating external research scores or detecting all unknown attacks."
+    ]
+  },
+  "refinement": {
+    "run_id": "microservice-sessions-routed-refinement-v1",
+    "script_sha256": "0617dfcd16212c48a6da9661f916e3935a2a66b8872236e84a01ae33932485bc",
+    "manifest_sha256": "c6202b3d91715163595f105dc67b42043ce05495be255b0597f01bc0fdae4618",
+    "recipes": {
+      "logistic_reference": "logistic_reference",
+      "rf_reference": "rf_reference",
+      "xgb_depth3": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.85,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": true,
+        "eval_metric": "logloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 3,
+        "max_leaves": null,
+        "min_child_weight": 4,
+        "missing": null,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 160,
+        "n_jobs": 4,
+        "num_parallel_tree": null,
+        "random_state": 20261019,
+        "reg_alpha": null,
+        "reg_lambda": 4,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.85,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null
+      },
+      "xgb_depth5": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.85,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": true,
+        "eval_metric": "logloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 5,
+        "max_leaves": null,
+        "min_child_weight": 4,
+        "missing": null,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 160,
+        "n_jobs": 4,
+        "num_parallel_tree": null,
+        "random_state": 20261019,
+        "reg_alpha": null,
+        "reg_lambda": 4,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.85,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null
+      }
+    },
+    "selection": "Mean standardized partial ROC-AUC with max_fpr=0.05, leave-one-transport-peer-out training CV. Calibration only after one recipe selected.",
+    "calibration_status": "Previously observed development calibration, NOT untouched test evidence.",
+    "promotion_rule": "Never deploy from this study. If calibration recall >=95% and FPR <=5%, require a newly collected independent holdout.",
+    "final_test_loaded": false,
+    "automatic_response_enabled": false,
+    "cv": {
+      "logistic_reference": {
+        "folds": [
+          {
+            "partial_auc_fpr05": 0.5896284785173674,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 189,
+              "accuracy": 0.8412698412698413,
+              "balanced_accuracy": 0.8358585858585859,
+              "macro_precision": 0.8592436974789917,
+              "macro_f1": 0.8374426605504588,
+              "attack_recall": 0.9494949494949495,
+              "attack_precision": 0.7899159663865546,
+              "false_positive_rate": 0.2777777777777778,
+              "roc_auc": 0.879685746352413,
+              "pr_auc": 0.8574265990437806,
+              "confusion_matrix": [
+                [
+                  65,
+                  25
+                ],
+                [
+                  5,
+                  94
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.7081216430938874,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 188,
+              "accuracy": 0.7872340425531915,
+              "balanced_accuracy": 0.7846380423700012,
+              "macro_precision": 0.793962793962794,
+              "macro_f1": 0.7847985347985348,
+              "attack_recall": 0.865979381443299,
+              "attack_precision": 0.7567567567567568,
+              "false_positive_rate": 0.2967032967032967,
+              "roc_auc": 0.9037045428798005,
+              "pr_auc": 0.9091210723315954,
+              "confusion_matrix": [
+                [
+                  64,
+                  27
+                ],
+                [
+                  13,
+                  84
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.6144506602587847,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 180,
+              "accuracy": 0.8333333333333334,
+              "balanced_accuracy": 0.8328188665267318,
+              "macro_precision": 0.8361391694725028,
+              "macro_f1": 0.8328173374613003,
+              "attack_recall": 0.7865168539325843,
+              "attack_precision": 0.8641975308641975,
+              "false_positive_rate": 0.12087912087912088,
+              "roc_auc": 0.9006050129645635,
+              "pr_auc": 0.8738332398148339,
+              "confusion_matrix": [
+                [
+                  80,
+                  11
+                ],
+                [
+                  19,
+                  70
+                ]
+              ]
+            }
+          }
+        ],
+        "mean_partial_auc_fpr05": 0.6374002606233465
+      },
+      "rf_reference": {
+        "folds": [
+          {
+            "partial_auc_fpr05": 0.7824397824397824,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 189,
+              "accuracy": 0.873015873015873,
+              "balanced_accuracy": 0.8676767676767676,
+              "macro_precision": 0.8932773109243697,
+              "macro_f1": 0.8699541284403669,
+              "attack_recall": 0.9797979797979798,
+              "attack_precision": 0.8151260504201681,
+              "false_positive_rate": 0.24444444444444444,
+              "roc_auc": 0.9356902356902357,
+              "pr_auc": 0.9419906165800054,
+              "confusion_matrix": [
+                [
+                  68,
+                  22
+                ],
+                [
+                  2,
+                  97
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.6852315012505338,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 188,
+              "accuracy": 0.8138297872340425,
+              "balanced_accuracy": 0.8127903024810241,
+              "macro_precision": 0.8147514819881441,
+              "macro_f1": 0.8131902450103625,
+              "attack_recall": 0.845360824742268,
+              "attack_precision": 0.803921568627451,
+              "false_positive_rate": 0.21978021978021978,
+              "roc_auc": 0.8977002379064235,
+              "pr_auc": 0.897632468602635,
+              "confusion_matrix": [
+                [
+                  71,
+                  20
+                ],
+                [
+                  15,
+                  82
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.7169007886380401,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 180,
+              "accuracy": 0.7666666666666667,
+              "balanced_accuracy": 0.7650327200888998,
+              "macro_precision": 0.7912087912087913,
+              "macro_f1": 0.7608805668016194,
+              "attack_recall": 0.6179775280898876,
+              "attack_precision": 0.873015873015873,
+              "false_positive_rate": 0.08791208791208792,
+              "roc_auc": 0.9036918138041733,
+              "pr_auc": 0.9017668277472047,
+              "confusion_matrix": [
+                [
+                  83,
+                  8
+                ],
+                [
+                  34,
+                  55
+                ]
+              ]
+            }
+          }
+        ],
+        "mean_partial_auc_fpr05": 0.7281906907761188
+      },
+      "xgb_depth3": {
+        "folds": [
+          {
+            "partial_auc_fpr05": 0.6402774180551958,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 189,
+              "accuracy": 0.873015873015873,
+              "balanced_accuracy": 0.8676767676767676,
+              "macro_precision": 0.8932773109243697,
+              "macro_f1": 0.8699541284403669,
+              "attack_recall": 0.9797979797979798,
+              "attack_precision": 0.8151260504201681,
+              "false_positive_rate": 0.24444444444444444,
+              "roc_auc": 0.8998877665544331,
+              "pr_auc": 0.8899326761450521,
+              "confusion_matrix": [
+                [
+                  68,
+                  22
+                ],
+                [
+                  2,
+                  97
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.7601182850984596,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 188,
+              "accuracy": 0.8617021276595744,
+              "balanced_accuracy": 0.8605415203353348,
+              "macro_precision": 0.863506567675614,
+              "macro_f1": 0.8611363636363636,
+              "attack_recall": 0.8969072164948454,
+              "attack_precision": 0.8446601941747572,
+              "false_positive_rate": 0.17582417582417584,
+              "roc_auc": 0.940976549223972,
+              "pr_auc": 0.9458029058671791,
+              "confusion_matrix": [
+                [
+                  75,
+                  16
+                ],
+                [
+                  10,
+                  87
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.6744137452866925,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 180,
+              "accuracy": 0.7777777777777778,
+              "balanced_accuracy": 0.7763921471786641,
+              "macro_precision": 0.7956676793026021,
+              "macro_f1": 0.7737556561085973,
+              "attack_recall": 0.651685393258427,
+              "attack_precision": 0.8656716417910447,
+              "false_positive_rate": 0.0989010989010989,
+              "roc_auc": 0.8810964316582295,
+              "pr_auc": 0.8779466338018835,
+              "confusion_matrix": [
+                [
+                  82,
+                  9
+                ],
+                [
+                  31,
+                  58
+                ]
+              ]
+            }
+          }
+        ],
+        "mean_partial_auc_fpr05": 0.691603149480116
+      },
+      "xgb_depth5": {
+        "folds": [
+          {
+            "partial_auc_fpr05": 0.5441595441595442,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 189,
+              "accuracy": 0.8624338624338624,
+              "balanced_accuracy": 0.8575757575757575,
+              "macro_precision": 0.8782051282051282,
+              "macro_f1": 0.8595679012345678,
+              "attack_recall": 0.9595959595959596,
+              "attack_precision": 0.811965811965812,
+              "false_positive_rate": 0.24444444444444444,
+              "roc_auc": 0.8687991021324355,
+              "pr_auc": 0.8179389228449271,
+              "confusion_matrix": [
+                [
+                  68,
+                  22
+                ],
+                [
+                  4,
+                  95
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.7519847321591968,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 188,
+              "accuracy": 0.8670212765957447,
+              "balanced_accuracy": 0.8663758921490881,
+              "macro_precision": 0.8674999999999999,
+              "macro_f1": 0.866715821115617,
+              "attack_recall": 0.8865979381443299,
+              "attack_precision": 0.86,
+              "false_positive_rate": 0.15384615384615385,
+              "roc_auc": 0.9410898379970546,
+              "pr_auc": 0.9448096555835808,
+              "confusion_matrix": [
+                [
+                  77,
+                  14
+                ],
+                [
+                  11,
+                  86
+                ]
+              ]
+            }
+          },
+          {
+            "partial_auc_fpr05": 0.6782128847815969,
+            "default_metrics": {
+              "threshold": 0.5,
+              "samples": 180,
+              "accuracy": 0.7833333333333333,
+              "balanced_accuracy": 0.7820101247067539,
+              "macro_precision": 0.7998949579831933,
+              "macro_f1": 0.7797370650434565,
+              "attack_recall": 0.6629213483146067,
+              "attack_precision": 0.8676470588235294,
+              "false_positive_rate": 0.0989010989010989,
+              "roc_auc": 0.8827015680948265,
+              "pr_auc": 0.8792884710309041,
+              "confusion_matrix": [
+                [
+                  82,
+                  9
+                ],
+                [
+                  30,
+                  59
+                ]
+              ]
+            }
+          }
+        ],
+        "mean_partial_auc_fpr05": 0.6581190537001126
+      }
+    },
+    "selected_model": "rf_reference",
+    "development_calibration": {
+      "threshold": 0.8000000000000003,
+      "samples": 185,
+      "accuracy": 0.6756756756756757,
+      "balanced_accuracy": 0.6645599250936329,
+      "macro_precision": 0.7567567567567568,
+      "macro_f1": 0.6389539422326307,
+      "attack_recall": 0.3707865168539326,
+      "attack_precision": 0.8918918918918919,
+      "false_positive_rate": 0.041666666666666664,
+      "roc_auc": 0.760065543071161,
+      "pr_auc": 0.789512527106205,
+      "confusion_matrix": [
+        [
+          92,
+          4
+        ],
+        [
+          56,
+          33
+        ]
+      ]
+    },
+    "eligible_for_fresh_holdout": false,
+    "status": "complete; old final test not opened; not deployed",
+    "model_sha256": "4a5e708a943d787ee65084abe77ab5fc48d291f5479100fe057070cd015cffd3"
+  },
+  "controls": {
+    "scope": "Real Gateway-to-Auth/H2 controls, not AI accuracy",
+    "requests": 19,
+    "concurrent_valid_requests": 12,
+    "concurrent_status": 200,
+    "missing_token_status": 401,
+    "invalid_token_status": 401,
+    "wrong_password_statuses": [
+      401,
+      401
+    ],
+    "rate_limit_status": 429,
+    "retry_after_present": true,
+    "auth_bucket_capacity": 4,
+    "automatic_ai_response": false,
+    "elapsed_seconds": 1.1731205
+  }
+}

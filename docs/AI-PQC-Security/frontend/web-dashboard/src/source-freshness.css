@@ -1,0 +1,10 @@
+.source-freshness{margin:0 0 24px;border:1px solid #334155;border-radius:12px;padding:16px;background:#111c2a;color:#cbd5e1}
+.source-freshness>p{margin:0 0 12px;font-size:12px;line-height:1.6}
+.source-freshness dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
+.source-state{min-width:0;padding:12px;border:1px solid #334155;border-radius:8px}
+.source-state dt{font-size:13px;font-weight:700;margin-bottom:8px}
+.source-state dd{margin:0;display:grid;gap:6px;overflow-wrap:anywhere}
+.source-state dd strong{font-size:12px;color:#b7f5db}
+.source-state.stale dd strong,.source-state.unavailable dd strong,.source-state.forbidden dd strong{color:#fbd38d}
+.source-state dd span{font-size:12px;line-height:1.5}
+@media(max-width:620px){.source-freshness dl{grid-template-columns:1fr}}

@@ -1,0 +1,17 @@
+/* PRD 6.1: text-first chrome, stable state labels, meaningful data charts only. */
+.brand{letter-spacing:-.02em}
+.metric-card>div{min-width:0;width:100%}
+.decision-journey{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.journey-step{min-width:0}
+.journey-step p,.journey-step small{overflow-wrap:anywhere}
+.service-evidence>div{grid-template-columns:minmax(0,1fr) auto}
+.event-record{grid-template-columns:minmax(150px,1fr) minmax(150px,1.2fr) 80px minmax(135px,.9fr);font-size:12px}
+.event-record small,.event-record time{font-size:11px}
+.run-selector button,.list-controls button,.record-action button,.refresh,.logout,.primary-button,.export-evidence{min-height:44px}
+@media(max-width:1250px){.decision-journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:821px) and (max-width:1180px){.event-record{min-width:680px}}
+@media(max-width:820px){
+  .decision-journey{grid-template-columns:1fr}
+  .event-record{grid-template-columns:minmax(0,1fr);min-width:0}
+  .event-record code,.event-record time,.event-record .outcome{grid-column:auto}
+}

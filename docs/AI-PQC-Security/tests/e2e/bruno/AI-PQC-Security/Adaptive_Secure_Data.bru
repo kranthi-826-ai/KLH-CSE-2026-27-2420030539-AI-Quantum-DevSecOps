@@ -1,0 +1,84 @@
+meta {
+  name: Adaptive Secure Data
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/api/v1/business/adaptive-secure-data
+  body: json
+  auth: bearer
+}
+
+headers {
+  Content-Type: application/json
+  X-Correlation-ID: bruno-adaptive-flow-001
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "data": "Research demonstration payload",
+    "dataSensitivity": "CONFIDENTIAL",
+    "hybridSupported": true,
+    "pqcSupported": true,
+    "maxCryptoLatencyMillis": 100,
+    "networkFeatures": {
+      "dur": 0.121478,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "spkts": 6,
+      "dpkts": 4,
+      "sbytes": 258,
+      "dbytes": 172,
+      "rate": 74.08749,
+      "sttl": 62,
+      "dttl": 252,
+      "sload": 14158.94238,
+      "dload": 8495.365234,
+      "sloss": 0,
+      "dloss": 0,
+      "sinpkt": 24.2956,
+      "dinpkt": 8.375,
+      "sjit": 30.177547,
+      "djit": 11.830604,
+      "swin": 255,
+      "stcpb": 621772692,
+      "dtcpb": 2202533631,
+      "dwin": 255,
+      "tcprtt": 0.000499,
+      "synack": 0.000381,
+      "ackdat": 0.000118,
+      "smean": 43,
+      "dmean": 43,
+      "trans_depth": 0,
+      "response_body_len": 0,
+      "ct_srv_src": 1,
+      "ct_state_ttl": 1,
+      "ct_dst_ltm": 1,
+      "ct_src_dport_ltm": 1,
+      "ct_dst_sport_ltm": 1,
+      "ct_dst_src_ltm": 1,
+      "is_ftp_login": 0,
+      "ct_ftp_cmd": 0,
+      "ct_flw_http_mthd": 0,
+      "ct_src_ltm": 1,
+      "ct_srv_dst": 1,
+      "is_sm_ips_ports": 0
+    }
+  }
+}
+
+tests {
+  test("adaptive security returns a verified encrypted envelope", function () {
+    expect(res.status).to.equal(200);
+    expect(res.body.roundTripVerified).to.equal(true);
+    expect(res.body.algorithmProfile).to.be.a("string");
+    expect(res.body.encryptedPayload).to.be.a("string");
+    expect(res.body.decisionId).to.be.a("string");
+  });
+}

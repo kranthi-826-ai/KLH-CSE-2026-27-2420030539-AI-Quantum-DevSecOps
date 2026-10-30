@@ -1,0 +1,27 @@
+{
+  "schema": "socialnetwork-temporal-grouped-v1",
+  "not_final_test": true,
+  "matched_rows": 557,
+  "features": 305,
+  "trace_scans": 32,
+  "all_selected_histories_complete": true,
+  "earlier_features_labels_and_row_order_preserved": true,
+  "temporal_results": {
+    "logistic": {"tp": 39,"fn": 12,"fp": 20,"tn": 486,"macro_f1": 0.8386091995653748},
+    "random_forest": {"tp": 36,"fn": 15,"fp": 0,"tn": 506,"macro_f1": 0.9064902796897558},
+    "xgboost": {"tp": 36,"fn": 15,"fp": 1,"tn": 505,"macro_f1": 0.9012936381357435}
+  },
+  "separate_posthoc_execution_guard": {
+    "not_pure_ml_improvement": true,
+    "combined_tp": 41,"combined_fn": 10,"combined_fp": 3,"combined_tn": 503,
+    "guard_plan_sha256": "da3cf5102e52b0b476325bd8aa19d2e24e0cb0c707f2b0f2391aa6fec05b9189"
+  },
+  "study_plan_sha256": "220c1b2a6a92262818dafa7821dabd4775aa9267d2674a60c217650612468cbe",
+  "data_sha256": "a376e0338fe79d2ece862581424d9dd653b0770d39f0ccd2fd47f361ab2cde71",
+  "feature_sha256": "cbc38dcec33b80e2c72469869f01d9d9deb95fd00acd3e4ff64c3322273260d0",
+  "selected_candidate": null,
+  "promoted": false,
+  "enforcement_enabled": false,
+  "tests_passed": 100,
+  "independent_test_consumed": false
+}

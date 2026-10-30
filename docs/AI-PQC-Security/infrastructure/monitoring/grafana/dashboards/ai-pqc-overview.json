@@ -1,0 +1,21 @@
+{
+  "annotations":{"list":[]},
+  "editable":false,
+  "panels":[
+    {"type":"stat","title":"Services UP","id":1,"gridPos":{"h":8,"w":8,"x":0,"y":0},"targets":[{"expr":"sum(up{job=\"ai-pqc-java-services\"})","refId":"A"}]},
+    {"type":"timeseries","title":"HTTP Request Rate","id":2,"gridPos":{"h":8,"w":16,"x":8,"y":0},"targets":[{"expr":"sum by (application) (rate(http_server_requests_seconds_count[2m]))","legendFormat":"{{application}}","refId":"A"}]},
+    {"type":"timeseries","title":"Adaptive Flow Latency p95","id":3,"gridPos":{"h":8,"w":12,"x":0,"y":8},"targets":[{"expr":"histogram_quantile(0.95, sum by (le, mode) (rate(adaptive_security_flow_duration_seconds_bucket[5m])))","legendFormat":"{{mode}}","refId":"A"}]},
+    {"type":"timeseries","title":"Adaptive Outcomes","id":4,"gridPos":{"h":8,"w":12,"x":12,"y":8},"targets":[{"expr":"sum by (outcome, mode, risk) (increase(adaptive_security_executions_total[15m]))","legendFormat":"{{outcome}} / {{mode}} / {{risk}}","refId":"A"}]},
+    {"type":"timeseries","title":"JVM Heap Usage","id":5,"gridPos":{"h":8,"w":12,"x":0,"y":16},"targets":[{"expr":"sum by (application) (jvm_memory_used_bytes{area=\"heap\"})","legendFormat":"{{application}}","refId":"A"}]},
+    {"type":"timeseries","title":"Process CPU","id":6,"gridPos":{"h":8,"w":12,"x":12,"y":16},"targets":[{"expr":"process_cpu_usage","legendFormat":"{{application}}","refId":"A"}]}
+  ],
+  "refresh":"15s",
+  "schemaVersion":42,
+  "tags":["ai-pqc","research","security"],
+  "templating":{"list":[]},
+  "time":{"from":"now-1h","to":"now"},
+  "timezone":"browser",
+  "title":"AI-PQC Adaptive Security Overview",
+  "uid":"ai-pqc-overview",
+  "version":1
+}

@@ -1,0 +1,29 @@
+{
+  "experiment": "socialnetwork-expanded-supervised-v1",
+  "scope": "scenario5 development collections1 and2; all other scenarios remain unscored",
+  "not_final_test": true,
+  "recordings": 16,
+  "cve_groups": 8,
+  "old_rows_preserved": 302,
+  "new_rows": 255,
+  "rows": 557,
+  "positive_exposure_windows": 51,
+  "control_windows": 506,
+  "results": {
+    "base_logistic": {"tp": 40, "fn": 11, "fp": 3, "tn": 503, "macro_f1": 0.9186691697955778},
+    "base_random_forest": {"tp": 36, "fn": 15, "fp": 0, "tn": 506, "macro_f1": 0.9064902796897558},
+    "base_xgboost": {"tp": 35, "fn": 16, "fp": 0, "tn": 506, "macro_f1": 0.8991946430187314},
+    "rich_logistic": {"tp": 37, "fn": 14, "fp": 14, "tn": 492, "macro_f1": 0.848911105944354},
+    "rich_random_forest": {"tp": 36, "fn": 15, "fp": 0, "tn": 506, "macro_f1": 0.9064902796897558},
+    "rich_xgboost": {"tp": 36, "fn": 15, "fp": 0, "tn": 506, "macro_f1": 0.9064902796897558}
+  },
+  "base_logistic_CVE_2022_0492": {"tp": 2, "fn": 9},
+  "selected_candidate": null,
+  "promoted": false,
+  "enforcement_enabled": false,
+  "data_plan_sha256": "6fbff47fb8fbf4ac819748f1f9d3698da4d35b588d2f84227f9b3939ce5295e4",
+  "data_sha256": "320590bfa10ce2908e43ba0ec329f0f17797c697b113288686ffae48d591bb39",
+  "study_plan_sha256": "c11fd5098e64ffcc1bef0eee8c6cb98c1bc5dd7fa86796667ed681e8f548bbc1",
+  "tests_passed": 93,
+  "final_test_consumed": false
+}

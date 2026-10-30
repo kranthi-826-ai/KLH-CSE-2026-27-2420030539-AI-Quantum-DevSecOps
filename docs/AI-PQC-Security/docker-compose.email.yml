@@ -1,0 +1,29 @@
+# Optional only: prepare ignored runtime files before enabling --profile email.
+services:
+  alertmanager:
+    image: prom/alertmanager:v0.34.1
+    profiles: [email]
+    command: ["--config.file=/etc/alertmanager/alertmanager.yml", "--storage.path=/alertmanager", "--cluster.listen-address="]
+    ports: ["127.0.0.1:9093:9093"]
+    volumes:
+      - type: bind
+        source: ./.runtime/email/alertmanager.yml
+        target: /etc/alertmanager/alertmanager.yml
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ./.runtime/email/smtp-password
+        target: /etc/alertmanager/secrets/smtp-password
+        read_only: true
+        bind: {create_host_path: false}
+      - alertmanager-data:/alertmanager
+    restart: unless-stopped
+  prometheus:
+    volumes:
+      - type: bind
+        source: ./.runtime/email/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+        bind: {create_host_path: false}
+volumes:
+  alertmanager-data:

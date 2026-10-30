@@ -1,0 +1,24 @@
+{
+  "experiment": "socialnetwork-rich-supervised-v1",
+  "not_final_test": true,
+  "base_features": 29,
+  "rich_features": 269,
+  "matched_rows": 302,
+  "positive_exposure_rows": 26,
+  "control_rows": 276,
+  "base_features_and_labels_unchanged": true,
+  "validation": "eight leave-one-CVE-recording-group-out folds, fixed threshold0.5",
+  "rich_results": {
+    "logistic": {"tp": 19, "fn": 7, "fp": 11, "tn": 265, "macro_f1": 0.8228623566214808},
+    "random_forest": {"tp": 18, "fn": 8, "fp": 3, "tn": 273, "macro_f1": 0.8731043966538065},
+    "xgboost": {"tp": 17, "fn": 9, "fp": 0, "tn": 276, "macro_f1": 0.8873274468349708}
+  },
+  "selected_candidate": null,
+  "promoted": false,
+  "enforcement_enabled": false,
+  "plan_sha256": "b862133442865c46a302e371640a3d581d69574b5006c492a678b28c4d661770",
+  "windows_sha256": "f9ae0b7db007cfe2b03c6858b036aa57f643e3d8bbe1217639d7893415e1f156",
+  "rich_feature_sha256": "1a9cf30fa97df100101209cf575dc1cf812ead6b7c85dd467db1018d15e59873",
+  "tests_passed": 90,
+  "final_test_consumed": false
+}

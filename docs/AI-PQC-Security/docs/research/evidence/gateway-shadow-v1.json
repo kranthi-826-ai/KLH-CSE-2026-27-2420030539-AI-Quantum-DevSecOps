@@ -1,0 +1,308 @@
+{
+  "scope": "Gateway shadow plumbing verification with test-only downstream handlers, not authentication/ML accuracy.",
+  "automatic_response_enabled": false,
+  "runs": [
+    {
+      "name": "primary",
+      "observations": [
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "2c67cdbc-71cd-4c42-8401-dfb0bbc7636a",
+          "peer_id": "a5cdea98-a822-4dc6-b4f0-2d1db79e81be",
+          "features": {
+            "prior_requests_1s": 0,
+            "seconds_since_previous_start": 5,
+            "prior_requests_5s": 0,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 0,
+            "prior_401_5s": 0,
+            "has_history": 0
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "10d21e96-4fc4-47da-a040-46386aff2349",
+          "peer_id": "a5cdea98-a822-4dc6-b4f0-2d1db79e81be",
+          "features": {
+            "prior_requests_1s": 1,
+            "seconds_since_previous_start": 0.0090178,
+            "prior_requests_5s": 1,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 1,
+            "prior_401_5s": 1,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "5b224910-58b3-4b78-8d9c-20bff8fa8f20",
+          "peer_id": "a5cdea98-a822-4dc6-b4f0-2d1db79e81be",
+          "features": {
+            "prior_requests_1s": 2,
+            "seconds_since_previous_start": 0.0026496,
+            "prior_requests_5s": 2,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 2,
+            "prior_401_5s": 2,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "3625b1dc-7939-4c08-8551-93167f036c94",
+          "peer_id": "a5cdea98-a822-4dc6-b4f0-2d1db79e81be",
+          "features": {
+            "prior_requests_1s": 3,
+            "seconds_since_previous_start": 0.0026808,
+            "prior_requests_5s": 3,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 3,
+            "prior_401_5s": 3,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 429
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "fe1153ff-3b19-4ca0-96bd-3dfad5e13369",
+          "peer_id": "a5cdea98-a822-4dc6-b4f0-2d1db79e81be",
+          "features": {
+            "prior_requests_1s": 4,
+            "seconds_since_previous_start": 0.002759,
+            "prior_requests_5s": 4,
+            "is_identity_read": 1,
+            "is_login": 0,
+            "has_bearer": 0,
+            "prior_failed_login_5s": 3,
+            "prior_401_5s": 3,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 200
+          }
+        }
+      ],
+      "assessments": {
+        "source_sha256": "42f284461fd8192458e4ee8afc8b7b67ce770791a1d6aa4fe73c482e697dd845",
+        "model_sha256": "294f310e7bafe7cf9e023a57a7530dde08745cdf7b41f92fac9cd34bd09d0703",
+        "frozen_sha256": "585c10152c7c6743981b1d0ead40aea2393e8f6490e8be33c0b66d79b516e779",
+        "threshold": 0.5500000000000003,
+        "scorer_sha256": "77e7cf3f61d14c9dd76be4687ae7fab18df845e2b9f8c52ff8042cc1c7666abc",
+        "observations": 5,
+        "assessments": [
+          {
+            "observation_id": "2c67cdbc-71cd-4c42-8401-dfb0bbc7636a",
+            "suspicious_intent_score": 0.5042205880415471,
+            "would_alert": false
+          },
+          {
+            "observation_id": "10d21e96-4fc4-47da-a040-46386aff2349",
+            "suspicious_intent_score": 0.7097025927301737,
+            "would_alert": true
+          },
+          {
+            "observation_id": "5b224910-58b3-4b78-8d9c-20bff8fa8f20",
+            "suspicious_intent_score": 0.7286837168071811,
+            "would_alert": true
+          },
+          {
+            "observation_id": "3625b1dc-7939-4c08-8551-93167f036c94",
+            "suspicious_intent_score": 0.8213195872451512,
+            "would_alert": true
+          },
+          {
+            "observation_id": "fe1153ff-3b19-4ca0-96bd-3dfad5e13369",
+            "suspicious_intent_score": 0.7890625,
+            "would_alert": true
+          }
+        ],
+        "shadow_only": true,
+        "automatic_response_enabled": false,
+        "model_promoted": false,
+        "accuracy_measured": false,
+        "would_alert_count": 4,
+        "limitations": [
+          "Gateway history is per actual peer, unlike the training harness per-account history.",
+          "Shared/NAT/proxy clients and concurrency can change feature distributions; scores are experimental.",
+          "Only supported synchronous authentication routes are observed; no unknown-attack or production accuracy claim.",
+          "No traffic labels were inferred from HTTP outcomes. No decisions were sent back to the gateway."
+        ]
+      }
+    },
+    {
+      "name": "repeat",
+      "observations": [
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "3a238a47-04a5-4346-8144-1bf1228e2baa",
+          "peer_id": "32764437-c8e4-40e6-846f-e0f0dc0a9e33",
+          "features": {
+            "prior_requests_1s": 0,
+            "seconds_since_previous_start": 5,
+            "prior_requests_5s": 0,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 0,
+            "prior_401_5s": 0,
+            "has_history": 0
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "d4bbe803-5a6f-4ef6-b5be-068d492f57ee",
+          "peer_id": "32764437-c8e4-40e6-846f-e0f0dc0a9e33",
+          "features": {
+            "prior_requests_1s": 1,
+            "seconds_since_previous_start": 0.1164996,
+            "prior_requests_5s": 1,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 1,
+            "prior_401_5s": 1,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "6d3d5656-b745-4edb-a14f-9fa12b8965e0",
+          "peer_id": "32764437-c8e4-40e6-846f-e0f0dc0a9e33",
+          "features": {
+            "prior_requests_1s": 2,
+            "seconds_since_previous_start": 0.0027905,
+            "prior_requests_5s": 2,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 2,
+            "prior_401_5s": 2,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 401
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "bc635965-7b7e-4309-9e4d-291d22783571",
+          "peer_id": "32764437-c8e4-40e6-846f-e0f0dc0a9e33",
+          "features": {
+            "prior_requests_1s": 3,
+            "seconds_since_previous_start": 0.0020854,
+            "prior_requests_5s": 3,
+            "is_identity_read": 0,
+            "is_login": 1,
+            "has_bearer": 1,
+            "prior_failed_login_5s": 3,
+            "prior_401_5s": 3,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 429
+          }
+        },
+        {
+          "schema": "gateway-peer-shadow-v1",
+          "shadow_only": true,
+          "observation_id": "f80be60b-9ca6-4547-9f8f-3ed1c74e4caa",
+          "peer_id": "32764437-c8e4-40e6-846f-e0f0dc0a9e33",
+          "features": {
+            "prior_requests_1s": 4,
+            "seconds_since_previous_start": 0.0048064,
+            "prior_requests_5s": 4,
+            "is_identity_read": 1,
+            "is_login": 0,
+            "has_bearer": 0,
+            "prior_failed_login_5s": 3,
+            "prior_401_5s": 3,
+            "has_history": 1
+          },
+          "outcome": {
+            "status": 200
+          }
+        }
+      ],
+      "assessments": {
+        "source_sha256": "30d4660fac7bbb29a385a6243e3ac9c2262303a9ea92db54ba414dcba93b3bfd",
+        "model_sha256": "294f310e7bafe7cf9e023a57a7530dde08745cdf7b41f92fac9cd34bd09d0703",
+        "frozen_sha256": "585c10152c7c6743981b1d0ead40aea2393e8f6490e8be33c0b66d79b516e779",
+        "threshold": 0.5500000000000003,
+        "scorer_sha256": "77e7cf3f61d14c9dd76be4687ae7fab18df845e2b9f8c52ff8042cc1c7666abc",
+        "observations": 5,
+        "assessments": [
+          {
+            "observation_id": "3a238a47-04a5-4346-8144-1bf1228e2baa",
+            "suspicious_intent_score": 0.5042205880415471,
+            "would_alert": false
+          },
+          {
+            "observation_id": "d4bbe803-5a6f-4ef6-b5be-068d492f57ee",
+            "suspicious_intent_score": 0.3885153016627132,
+            "would_alert": false
+          },
+          {
+            "observation_id": "6d3d5656-b745-4edb-a14f-9fa12b8965e0",
+            "suspicious_intent_score": 0.7286837168071811,
+            "would_alert": true
+          },
+          {
+            "observation_id": "bc635965-7b7e-4309-9e4d-291d22783571",
+            "suspicious_intent_score": 0.8213195872451512,
+            "would_alert": true
+          },
+          {
+            "observation_id": "f80be60b-9ca6-4547-9f8f-3ed1c74e4caa",
+            "suspicious_intent_score": 0.7890625,
+            "would_alert": true
+          }
+        ],
+        "shadow_only": true,
+        "automatic_response_enabled": false,
+        "model_promoted": false,
+        "accuracy_measured": false,
+        "would_alert_count": 3,
+        "limitations": [
+          "Gateway history is per actual peer, unlike the training harness per-account history.",
+          "Shared/NAT/proxy clients and concurrency can change feature distributions; scores are experimental.",
+          "Only supported synchronous authentication routes are observed; no unknown-attack or production accuracy claim.",
+          "No traffic labels were inferred from HTTP outcomes. No decisions were sent back to the gateway."
+        ]
+      }
+    }
+  ]
+}

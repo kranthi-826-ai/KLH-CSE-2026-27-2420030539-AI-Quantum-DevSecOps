@@ -1,0 +1,29 @@
+{
+  "experiment": "socialnetwork-exposure-evaluation-v1",
+  "model": "socialnetwork-reference-v2",
+  "scope": "scenario5 plain_workload collection1, eight CVEs, both workers",
+  "case_alerts": 8,
+  "covered_cases": 8,
+  "overlap_windows": 26,
+  "overlap_alerts": 20,
+  "fully_inside_windows": 11,
+  "fully_inside_alerts": 8,
+  "pre_injection_control_windows": 276,
+  "pre_injection_control_alarms": 7,
+  "attack_accuracy": null,
+  "enforcement_enabled": false,
+  "promoted": false,
+  "tests_passed": 79,
+  "model_sha256": "a283927dda6c9907c51039ec21b10efad56cb8da3c0e477ddc0f981cab98008e",
+  "exposure_plan_sha256": "21cb9dfe2614364ca5279df5e8fe6d721fcccf87b74e7123308934e93ce5d92a",
+  "control_plan_sha256": "139d1c476c1ee88c8054ed769aa326729bc594099ba3352a1eee5a485596c5e4",
+  "exposure_result_sha256": "94db6c4139e0eb25f68fa06759916a11f18b69ae848b33cbba9ac10efeb45333",
+  "control_result_sha256": "0370a94079d1b4eda080cbbcbeef2fc8db67d14f384e766a7cd630aadcf253db",
+  "limitations": [
+    "Exposure annotations do not verify exploit success",
+    "Small correlated sample; one scenario and collection only",
+    "Pre-injection controls are not forensic proof of benignity",
+    "No 100 percent accuracy or research-paper superiority claim",
+    "Scored cases are now development evidence for future candidates"
+  ]
+}

@@ -1,0 +1,164 @@
+x-java-service: &java-service
+  profiles: [app]
+  restart: unless-stopped
+  environment: &java-environment
+    EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
+    DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+    MONITORING_API_KEY: ${MONITORING_API_KEY:?Set MONITORING_API_KEY in .env}
+
+x-java-build: &java-build
+  context: .
+  dockerfile: infrastructure/docker/java-service.Dockerfile
+
+services:
+  mysql:
+    image: mysql:8.4
+    profiles: [app]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    ports: ["3307:3306"]
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./infrastructure/database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  discovery-server:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: backend/discovery-server
+        JAR_NAME: discovery-server-0.0.1-SNAPSHOT.jar
+    environment:
+      <<: *java-environment
+      EUREKA_INSTANCE_HOSTNAME: discovery-server
+    ports: ["8761:8761"]
+
+  api-gateway:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: backend/api-gateway
+        JAR_NAME: api-gateway-0.0.1-SNAPSHOT.jar
+    ports: ["8080:8080"]
+    depends_on: [discovery-server]
+
+  auth-service:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: backend/auth-service
+        JAR_NAME: auth-service-0.0.1-SNAPSHOT.jar
+    environment:
+      <<: *java-environment
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pqc_auth_db?serverTimezone=UTC
+    depends_on:
+      mysql: {condition: service_healthy}
+      discovery-server: {condition: service_started}
+
+  business-service:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: backend/business-service
+        JAR_NAME: business-service-0.0.1-SNAPSHOT.jar
+    environment:
+      <<: *java-environment
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pqc_business_db?serverTimezone=UTC
+      ADAPTIVE_POLICY_URL: http://adaptive-policy-engine:8091
+    depends_on:
+      mysql: {condition: service_healthy}
+      discovery-server: {condition: service_started}
+      adaptive-policy-engine: {condition: service_started}
+
+  security-monitoring-service:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: backend/security-monitoring-service
+        JAR_NAME: security-monitoring-service-0.0.1-SNAPSHOT.jar
+    environment:
+      <<: *java-environment
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pqc_monitoring_db?serverTimezone=UTC
+      PROMETHEUS_URL: http://prometheus:9090
+    depends_on:
+      mysql: {condition: service_healthy}
+      discovery-server: {condition: service_started}
+
+  adaptive-policy-engine:
+    <<: *java-service
+    build:
+      <<: *java-build
+      args:
+        MODULE: platform/adaptive-policy-engine
+        JAR_NAME: adaptive-policy-engine-0.1.0-SNAPSHOT.jar
+    environment:
+      <<: *java-environment
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pqc_policy_db?serverTimezone=UTC
+      AI_SECURITY_SERVICE_URL: http://ai-security-service:8090
+    depends_on:
+      mysql: {condition: service_healthy}
+      discovery-server: {condition: service_started}
+      ai-security-service: {condition: service_started}
+
+  ai-security-service:
+    profiles: [app]
+    build:
+      context: .
+      dockerfile: platform/ai-security-service/Dockerfile
+    environment:
+      MONITORING_API_KEY: ${MONITORING_API_KEY:?Set MONITORING_API_KEY in .env}
+      AI_MODEL_PATH: /models/model.joblib
+    volumes:
+      - ${AI_MODEL_PATH:-./ml/models/promoted/model.joblib}:/models/model.joblib:ro
+    ports: ["8090:8090"]
+    restart: unless-stopped
+
+  web-dashboard:
+    profiles: [app]
+    build:
+      context: .
+      dockerfile: frontend/web-dashboard/Dockerfile
+    ports: ["8088:80"]
+    depends_on: [api-gateway]
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.7.3
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=7d"]
+    ports: ["9090:9090"]
+    volumes:
+      - ${PROMETHEUS_CONFIG:-./infrastructure/monitoring/prometheus.yml}:/etc/prometheus/prometheus.yml:ro
+      - ./infrastructure/monitoring/audit-alerts.yml:/etc/prometheus/audit-alerts.yml:ro
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:12.3.1
+    ports: ["3000:3000"]
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set GRAFANA_ADMIN_PASSWORD in .env}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./infrastructure/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infrastructure/monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+  prometheus-data:
+  grafana-data:

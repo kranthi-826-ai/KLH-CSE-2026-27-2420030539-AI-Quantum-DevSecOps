@@ -1,0 +1,748 @@
+{
+  "dataset_manifest": {
+    "run_id": "microservice-sessions-ae31f299e0764fa1882961d2dc333bf4",
+    "created_utc": "2026-10-19T14:49:41.380079+00:00",
+    "seed": 20261019,
+    "scenarios": [
+      "normal_use",
+      "normal_mistakes",
+      "legitimate_burst",
+      "credential_guessing",
+      "invalid_token_burst",
+      "missing_token_burst"
+    ],
+    "split_blocks": {
+      "train": 6,
+      "calibration": 2,
+      "test": 2
+    },
+    "feature_columns": [
+      "is_login",
+      "is_identity_read",
+      "has_bearer",
+      "has_history",
+      "prior_requests_1s",
+      "prior_requests_5s",
+      "prior_401_5s",
+      "prior_failed_login_5s",
+      "seconds_since_previous_start"
+    ],
+    "requests_per_session": [
+      12,
+      20
+    ],
+    "split_protocol": "Chronological collection phases; disjoint ephemeral accounts/sessions. No session enters multiple partitions.",
+    "identity_scope": "Harness-owned per-account history; not an attacker-controlled session header. Production identity integration is not implemented.",
+    "target": "Controlled scenario intent, not HTTP outcome. Normal mistakes and legitimate bursts have target 0.",
+    "label_mapping": {
+      "normal_use": 0,
+      "normal_mistakes": 0,
+      "legitimate_burst": 0,
+      "credential_guessing": 1,
+      "invalid_token_burst": 1,
+      "missing_token_burst": 1
+    },
+    "maximum_http_requests": 1320,
+    "maximum_elapsed_seconds": 210,
+    "source_hashes": {
+      "collect_microservice_sessions.py": "f8e670b3daa18c1785b5f69e51434d4c7f574c485f9efc0cde529cfff077deaf",
+      "microservice_session_features.py": "9590c29f55423444ff12592f1c04d9c074189757ff64cb5300c0ec03495cb736",
+      "collect_microservice_lab.py": "22488f3480eedb34830e302c0f973b3d1db266f7b7ef87c7c1cab1cbeaf9d6f1"
+    },
+    "python": "3.14.6",
+    "production_traffic": false,
+    "scope": "Actual HTTP to isolated Auth Service/H2; monitoring publisher stubbed; no gateway or MySQL.",
+    "excluded_predictors": [
+      "scenario",
+      "target",
+      "session_id",
+      "split",
+      "sequence",
+      "status",
+      "duration_ms",
+      "expected_status"
+    ],
+    "status": "complete",
+    "splits": {
+      "train": {
+        "rows": 557,
+        "sessions": [
+          {
+            "session_id": "60401d7f2d3e4efbbc5b9d79b103471c",
+            "scenario": "missing_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "b707731bf1704d538cf68bb966513888",
+            "scenario": "normal_mistakes",
+            "requests": 17
+          },
+          {
+            "session_id": "30f97cb1cef649f39db86c49c6bc3950",
+            "scenario": "credential_guessing",
+            "requests": 16
+          },
+          {
+            "session_id": "b95a7e12bd9148108d64f2833b58978b",
+            "scenario": "normal_use",
+            "requests": 15
+          },
+          {
+            "session_id": "9cce122343cc4d57a21dba8fb4e3ea79",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "761bf2fc6d2c4ee2bf4163004d213341",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "c5851f382e4e4d97ab121a7fe471c0b3",
+            "scenario": "missing_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "2989d62aaf7e4e859b37b6628a24fd7b",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "dcc9bbedf56341aeb2fbaa6ed34c1143",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "408277dbd1ac42ffa7cbbb4fe786517e",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "ba1bc309690647fcb268afc015453bdb",
+            "scenario": "normal_mistakes",
+            "requests": 12
+          },
+          {
+            "session_id": "25feb404a71f4ca199158a8672b5656f",
+            "scenario": "credential_guessing",
+            "requests": 19
+          },
+          {
+            "session_id": "4142e2ae204f42d4a3847e580f3183d1",
+            "scenario": "credential_guessing",
+            "requests": 12
+          },
+          {
+            "session_id": "2fd9bcd9b8df4f6391442016c79890b4",
+            "scenario": "normal_mistakes",
+            "requests": 19
+          },
+          {
+            "session_id": "d491f064f824486c9da75c64ddda4503",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "79cd37ee9f174d66a7f6e309e88a01b1",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "ac3b20ae5c3047e2ba10b2ca377bf068",
+            "scenario": "normal_use",
+            "requests": 12
+          },
+          {
+            "session_id": "670ae4f8e087495da0e1237f1b246ec4",
+            "scenario": "missing_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "f9c3ec3453c84cd98611a1965d78d409",
+            "scenario": "legitimate_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "cc91273d945b47cbaff36bbba4635034",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "4a1577edd89942889e08a5c2f236cbdc",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "34f3f473c893448b9f54d12591881432",
+            "scenario": "normal_mistakes",
+            "requests": 15
+          },
+          {
+            "session_id": "439c98ed05e3489d8b345f521f200ee1",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "99edbd2e74524aa5afec36310e4780b6",
+            "scenario": "missing_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "2f834823bf764ebf995f8d7dcd907a2b",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          },
+          {
+            "session_id": "f3e449f545e24017b0a9b4ca408e1aae",
+            "scenario": "missing_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "01354e9014fe4c24999ad70603699353",
+            "scenario": "normal_use",
+            "requests": 20
+          },
+          {
+            "session_id": "7aff35f4c4aa4cbfbcce689535c6eabd",
+            "scenario": "legitimate_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "4a3d3973cb6342a9aee63251338f76d9",
+            "scenario": "invalid_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "0e840059b229451f9a4985da79b02fe4",
+            "scenario": "credential_guessing",
+            "requests": 17
+          },
+          {
+            "session_id": "15cd8b75a9194144af4a035727184277",
+            "scenario": "legitimate_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "bd117e4441cb429a9f65ff31eb8021fa",
+            "scenario": "missing_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "eedf745ed7f0443fa812340a268e7146",
+            "scenario": "normal_mistakes",
+            "requests": 15
+          },
+          {
+            "session_id": "d2e55ed29dd04913be7bf54883621b4d",
+            "scenario": "normal_use",
+            "requests": 17
+          },
+          {
+            "session_id": "9445f9d22ab0488095bd3a7603b2112a",
+            "scenario": "credential_guessing",
+            "requests": 15
+          },
+          {
+            "session_id": "271ce9d0942a419dab101e09526e233c",
+            "scenario": "invalid_token_burst",
+            "requests": 18
+          }
+        ],
+        "sha256": "3ed25c42c701a81d943349c0780b8b653194a1c96bee0711f74de5bbe5ff30c6"
+      },
+      "calibration": {
+        "rows": 185,
+        "sessions": [
+          {
+            "session_id": "c0270741b91945f2a5920569e90689d9",
+            "scenario": "invalid_token_burst",
+            "requests": 16
+          },
+          {
+            "session_id": "aa45b5812764430dab67444676bf8861",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "bd98885d2c82423193765786990c224e",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "890e737400d74e05aa64cbc5142e8fcb",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "58c0219be4fc403aba8edce6b172736c",
+            "scenario": "normal_mistakes",
+            "requests": 14
+          },
+          {
+            "session_id": "acc4000bfa3c4dd1bd1ab88a429fdd69",
+            "scenario": "missing_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "98ad5c26ab1444cc8aae3951112a3786",
+            "scenario": "normal_use",
+            "requests": 15
+          },
+          {
+            "session_id": "307d72b8ff0f4887b57428c29d02340c",
+            "scenario": "missing_token_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "98e2713eff044f34a146b21d47ef625e",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "1be86ae780614f52a6ba7c7c8030aad6",
+            "scenario": "credential_guessing",
+            "requests": 15
+          },
+          {
+            "session_id": "8c5a6f06582543d99d2ca22d314547ac",
+            "scenario": "invalid_token_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "57e01fa37b0c4f7c9d1f16fc742fafdd",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          }
+        ],
+        "sha256": "fb65dd95d045f51400ac09b59cd36d433fd79899b8d8f5cb0e304812278d1eb7"
+      },
+      "test": {
+        "rows": 194,
+        "sessions": [
+          {
+            "session_id": "d90de7cb97414a85a81ec779849ae609",
+            "scenario": "normal_mistakes",
+            "requests": 19
+          },
+          {
+            "session_id": "2d60d45a6b874d149b992d3381d33a3c",
+            "scenario": "invalid_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "7461412ca46340ac88963e29a0ffa2d1",
+            "scenario": "missing_token_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "1199fe1e509b4a438684826b9e3a5e6e",
+            "scenario": "legitimate_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "c59862a19aa64246a9c65a30148381e0",
+            "scenario": "normal_use",
+            "requests": 14
+          },
+          {
+            "session_id": "1aefa8c79d924280a7e101e2d8919e54",
+            "scenario": "credential_guessing",
+            "requests": 14
+          },
+          {
+            "session_id": "ba4cbb759207458eafc77d3902397ce9",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "5dd8936f1e5f40c3a6704decd5361029",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "675ffcbaeac5489c9daa491265c8c4ea",
+            "scenario": "normal_use",
+            "requests": 16
+          },
+          {
+            "session_id": "83cc1b603c1142509507090b8184bc04",
+            "scenario": "credential_guessing",
+            "requests": 19
+          },
+          {
+            "session_id": "5043eee561bc42a2bb7f1cbcd04fdfef",
+            "scenario": "normal_mistakes",
+            "requests": 20
+          },
+          {
+            "session_id": "c45814f98d9f4bf8b65b9977e3793335",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          }
+        ],
+        "sha256": "20286a30b5697ac92ae22e5cde81e25e720be289cb312b44abb26a5d86f8ef3f"
+      }
+    },
+    "setup_http_requests": 120,
+    "elapsed_seconds": 59.36732440000196,
+    "total_http_requests": 1056,
+    "retained_secrets": false,
+    "model_evaluated": false
+  },
+  "frozen_selection": {
+    "run_id": "microservice-sessions-v1",
+    "created_utc": "2026-10-19T14:51:15.795839+00:00",
+    "recipes": {
+      "logistic": {
+        "C": 1,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "random_forest": {
+        "n_estimators": 128,
+        "max_depth": 6,
+        "min_samples_leaf": 3,
+        "class_weight": "balanced",
+        "n_jobs": 4
+      }
+    },
+    "seed": 20261019,
+    "feature_columns": [
+      "is_login",
+      "is_identity_read",
+      "has_bearer",
+      "has_history",
+      "prior_requests_1s",
+      "prior_requests_5s",
+      "prior_401_5s",
+      "prior_failed_login_5s",
+      "seconds_since_previous_start"
+    ],
+    "manifest_sha256": "3844bcfa2cc658e38d5a0c453c567d56f6ce8280f3826f2394cfefa45acc6a2c",
+    "script_sha256": "a99d2c9fe2bc7bc701b6beacd60ade16097f26b4c043a1edfe26e4eab2ea3ed5",
+    "evaluator_sha256": "bc429aa3bdd0915341e40f6c9dfc1d92d03e7915e8433c50e4e2cc6fd574688d",
+    "feature_module_sha256": "9590c29f55423444ff12592f1c04d9c074189757ff64cb5300c0ec03495cb736",
+    "metric_helper_sha256": "b4e4b6ae84953a7df936f92fef8d03d2ffc7e5a7a9dfa36ad9eef2d1f956e380",
+    "selection": "Three-fold stratified GROUP training CV macro-F1; independent calibration thresholds, then freeze.",
+    "gates": "Calibration and final test: attack recall >=95%, FPR <=5%. Passing lab gates never authorizes production deployment.",
+    "test_protocol": "Reserved later-session test may be evaluated once after model/threshold/code hashes are frozen.",
+    "bootstrap": "500 session-cluster bootstrap replicates, seed 20261019, percentile 95% intervals; conditional on this harness only.",
+    "environment": {
+      "python": "3.14.6",
+      "numpy": "2.5.3",
+      "sklearn": "1.9.1"
+    },
+    "automatic_response_enabled": false,
+    "production_accuracy_claim": false,
+    "cv": {
+      "logistic": {
+        "folds": [
+          {
+            "threshold": 0.5,
+            "samples": 186,
+            "accuracy": 0.9516129032258065,
+            "balanced_accuracy": 0.9514748409485252,
+            "macro_precision": 0.9517361111111111,
+            "macro_f1": 0.9515779121228776,
+            "attack_recall": 0.9578947368421052,
+            "attack_precision": 0.9479166666666666,
+            "false_positive_rate": 0.054945054945054944,
+            "roc_auc": 0.9914401388085599,
+            "pr_auc": 0.9919662832398748,
+            "confusion_matrix": [
+              [
+                86,
+                5
+              ],
+              [
+                4,
+                91
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 185,
+            "accuracy": 0.972972972972973,
+            "balanced_accuracy": 0.9722222222222222,
+            "macro_precision": 0.975,
+            "macro_f1": 0.9728937728937729,
+            "attack_recall": 1,
+            "attack_precision": 0.95,
+            "false_positive_rate": 0.05555555555555555,
+            "roc_auc": 0.9980701754385964,
+            "pr_auc": 0.9977268530177117,
+            "confusion_matrix": [
+              [
+                85,
+                5
+              ],
+              [
+                0,
+                95
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 186,
+            "accuracy": 0.9032258064516129,
+            "balanced_accuracy": 0.9048004626951995,
+            "macro_precision": 0.9114638447971781,
+            "macro_f1": 0.9029452690166976,
+            "attack_recall": 0.8315789473684211,
+            "attack_precision": 0.9753086419753086,
+            "false_positive_rate": 0.02197802197802198,
+            "roc_auc": 0.9901677270098322,
+            "pr_auc": 0.9894722743977601,
+            "confusion_matrix": [
+              [
+                89,
+                2
+              ],
+              [
+                16,
+                79
+              ]
+            ]
+          }
+        ],
+        "mean_macro_f1": 0.9424723180111161
+      },
+      "random_forest": {
+        "folds": [
+          {
+            "threshold": 0.5,
+            "samples": 186,
+            "accuracy": 0.978494623655914,
+            "balanced_accuracy": 0.9784846732215153,
+            "macro_precision": 0.9784846732215153,
+            "macro_f1": 0.9784846732215153,
+            "attack_recall": 0.9789473684210527,
+            "attack_precision": 0.9789473684210527,
+            "false_positive_rate": 0.02197802197802198,
+            "roc_auc": 0.9984962406015038,
+            "pr_auc": 0.9981096407443748,
+            "confusion_matrix": [
+              [
+                89,
+                2
+              ],
+              [
+                2,
+                93
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 185,
+            "accuracy": 0.9837837837837838,
+            "balanced_accuracy": 0.9833333333333334,
+            "macro_precision": 0.9846938775510203,
+            "macro_f1": 0.983753403003425,
+            "attack_recall": 1,
+            "attack_precision": 0.9693877551020408,
+            "false_positive_rate": 0.03333333333333333,
+            "roc_auc": 0.9994736842105263,
+            "pr_auc": 0.9990332975295382,
+            "confusion_matrix": [
+              [
+                87,
+                3
+              ],
+              [
+                0,
+                95
+              ]
+            ]
+          },
+          {
+            "threshold": 0.5,
+            "samples": 186,
+            "accuracy": 0.956989247311828,
+            "balanced_accuracy": 0.9576633892423366,
+            "macro_precision": 0.958299548245106,
+            "macro_f1": 0.9569842738205365,
+            "attack_recall": 0.9263157894736842,
+            "attack_precision": 0.9887640449438202,
+            "false_positive_rate": 0.01098901098901099,
+            "roc_auc": 0.993637941006362,
+            "pr_auc": 0.9935743349192822,
+            "confusion_matrix": [
+              [
+                90,
+                1
+              ],
+              [
+                7,
+                88
+              ]
+            ]
+          }
+        ],
+        "mean_macro_f1": 0.9730741166818255
+      }
+    },
+    "reserved_test_loaded": false,
+    "selected_model": "random_forest",
+    "calibration": {
+      "threshold": 0.5500000000000003,
+      "samples": 185,
+      "accuracy": 0.9675675675675676,
+      "balanced_accuracy": 0.9671114232209738,
+      "macro_precision": 0.9680975838611307,
+      "macro_f1": 0.9674906279287723,
+      "attack_recall": 0.9550561797752809,
+      "attack_precision": 0.9770114942528736,
+      "false_positive_rate": 0.020833333333333332,
+      "roc_auc": 0.997191011235955,
+      "pr_auc": 0.9964566558729351,
+      "confusion_matrix": [
+        [
+          94,
+          2
+        ],
+        [
+          4,
+          85
+        ]
+      ]
+    },
+    "calibration_eligible": true,
+    "training_rows": 557,
+    "training_sessions": 36,
+    "model_sha256": "294f310e7bafe7cf9e023a57a7530dde08745cdf7b41f92fac9cd34bd09d0703"
+  },
+  "final_test": {
+    "run_id": "microservice-sessions-v1",
+    "frozen_sha256": "585c10152c7c6743981b1d0ead40aea2393e8f6490e8be33c0b66d79b516e779",
+    "manifest_sha256": "3844bcfa2cc658e38d5a0c453c567d56f6ce8280f3826f2394cfefa45acc6a2c",
+    "reserved_test_loaded": true,
+    "test_rows": 194,
+    "test_sessions": 12,
+    "candidate": {
+      "threshold": 0.5500000000000003,
+      "samples": 194,
+      "accuracy": 0.979381443298969,
+      "balanced_accuracy": 0.9793814432989691,
+      "macro_precision": 0.9801980198019802,
+      "macro_f1": 0.9793726741095162,
+      "attack_recall": 0.9587628865979382,
+      "attack_precision": 1,
+      "false_positive_rate": 0,
+      "roc_auc": 0.9989371877989159,
+      "pr_auc": 0.9983737941466908,
+      "confusion_matrix": [
+        [
+          97,
+          0
+        ],
+        [
+          4,
+          93
+        ]
+      ]
+    },
+    "session_cluster_95_intervals": {
+      "accuracy": {
+        "lower": 0.9627659574468085,
+        "upper": 0.9949250154607298,
+        "valid_replicates": 500
+      },
+      "attack_recall": {
+        "lower": 0.9344063545150502,
+        "upper": 0.9848484848484849,
+        "valid_replicates": 500
+      },
+      "false_positive_rate": {
+        "lower": 0,
+        "upper": 0,
+        "valid_replicates": 500
+      }
+    },
+    "always_normal_baseline": {
+      "threshold": 0.5,
+      "samples": 194,
+      "accuracy": 0.5,
+      "balanced_accuracy": 0.5,
+      "macro_precision": 0.25,
+      "macro_f1": 0.3333333333333333,
+      "attack_recall": 0,
+      "attack_precision": 0,
+      "false_positive_rate": 0,
+      "roc_auc": 0.5,
+      "pr_auc": 0.5,
+      "confusion_matrix": [
+        [
+          97,
+          0
+        ],
+        [
+          97,
+          0
+        ]
+      ]
+    },
+    "history_rule_baseline": {
+      "threshold": 0.5,
+      "samples": 194,
+      "accuracy": 0.8865979381443299,
+      "balanced_accuracy": 0.8865979381443299,
+      "macro_precision": 0.907563025210084,
+      "macro_f1": 0.885120585701981,
+      "attack_recall": 0.7731958762886598,
+      "attack_precision": 1,
+      "false_positive_rate": 0,
+      "roc_auc": 0.8865979381443299,
+      "pr_auc": 0.8865979381443299,
+      "confusion_matrix": [
+        [
+          97,
+          0
+        ],
+        [
+          22,
+          75
+        ]
+      ]
+    },
+    "by_scenario": {
+      "credential_guessing": {
+        "samples": 33,
+        "alert_rate": 1
+      },
+      "invalid_token_burst": {
+        "samples": 27,
+        "alert_rate": 0.9259259259259259
+      },
+      "legitimate_burst": {
+        "samples": 28,
+        "alert_rate": 0
+      },
+      "missing_token_burst": {
+        "samples": 37,
+        "alert_rate": 0.9459459459459459
+      },
+      "normal_mistakes": {
+        "samples": 39,
+        "alert_rate": 0
+      },
+      "normal_use": {
+        "samples": 30,
+        "alert_rate": 0
+      }
+    },
+    "lab_gates_pass": true,
+    "automatic_response_enabled": false,
+    "promoted": false,
+    "scope": "Later sessions from the same controlled HTTP harness and host; NOT production or cross-dataset accuracy.",
+    "limitations": [
+      "Only 12 held-out sessions, same scenario generator, application, host and collection run.",
+      "No successful exploitation, distributed DDoS, unknown attack family or production users evaluated.",
+      "First suspicious requests may be indistinguishable from legitimate mistakes.",
+      "Observed labels are controlled intent; outcomes are independent control evidence, not model labels.",
+      "CICIoT/UNSW model and reserved datasets were not changed or opened."
+    ]
+  }
+}

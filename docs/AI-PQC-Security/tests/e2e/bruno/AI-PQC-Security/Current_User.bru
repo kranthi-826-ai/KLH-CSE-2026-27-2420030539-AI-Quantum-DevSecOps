@@ -1,0 +1,23 @@
+meta {
+  name: Current User
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8080/api/v1/auth/me
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+tests {
+  test("valid JWT accesses protected endpoint", function () {
+    expect(res.status).to.equal(200);
+    expect(res.body.username).to.equal("brunouser");
+    expect(res.body.role).to.equal("ROLE_USER");
+  });
+}

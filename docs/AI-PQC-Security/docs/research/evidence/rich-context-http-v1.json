@@ -1,0 +1,1501 @@
+{
+  "scope": "Fresh rich-context Gateway-to-Auth study, matched feature ablation and frozen legacy comparison; no deployment.",
+  "manifest": {
+    "run_id": "microservice-sessions-b93fa18bfffb49a58e13f890317bd8a0",
+    "created_utc": "2026-10-19T16:03:44.255026+00:00",
+    "seed": 20261021,
+    "scenarios": [
+      "normal_use",
+      "normal_mistakes",
+      "legitimate_burst",
+      "legitimate_token_refresh",
+      "credential_guessing",
+      "invalid_token_burst",
+      "missing_token_burst",
+      "rotating_invalid_tokens"
+    ],
+    "split_blocks": {
+      "train": 6,
+      "calibration": 2,
+      "test": 2
+    },
+    "feature_columns": [
+      "is_login",
+      "is_identity_read",
+      "has_bearer",
+      "has_history",
+      "prior_requests_1s",
+      "prior_requests_5s",
+      "prior_401_5s",
+      "prior_failed_login_5s",
+      "seconds_since_previous_start",
+      "context_prior_requests_5s",
+      "context_prior_401_5s",
+      "context_prior_success_5s",
+      "route_prior_requests_5s",
+      "route_prior_401_5s",
+      "route_prior_success_5s",
+      "peer_consecutive_401",
+      "context_consecutive_401",
+      "context_is_new",
+      "context_last_was_401",
+      "route_last_was_401",
+      "peer_last_was_401",
+      "unique_bearer_contexts_5s",
+      "prior_success_5s",
+      "seconds_since_context_start"
+    ],
+    "requests_per_session": [
+      12,
+      20
+    ],
+    "split_protocol": "Chronological collection phases; disjoint ephemeral accounts/sessions. No session enters multiple partitions.",
+    "identity_scope": "Gateway records are joined using server-generated observation IDs; source peer is never a caller header.",
+    "target": "Controlled scenario intent, not HTTP outcome. Normal mistakes and legitimate bursts have target 0.",
+    "label_mapping": {
+      "normal_use": 0,
+      "normal_mistakes": 0,
+      "legitimate_burst": 0,
+      "legitimate_token_refresh": 0,
+      "credential_guessing": 1,
+      "invalid_token_burst": 1,
+      "missing_token_burst": 1,
+      "rotating_invalid_tokens": 1
+    },
+    "maximum_http_requests": 2000,
+    "maximum_elapsed_seconds": 270,
+    "source_hashes": {
+      "collect_microservice_sessions.py": "a95739ec36b713080705e00b4b5f80fb7925cf0846cedf02e26d3e162c5d5cc7",
+      "microservice_session_features.py": "9590c29f55423444ff12592f1c04d9c074189757ff64cb5300c0ec03495cb736",
+      "collect_microservice_lab.py": "22488f3480eedb34830e302c0f973b3d1db266f7b7ef87c7c1cab1cbeaf9d6f1"
+    },
+    "python": "3.14.6",
+    "production_traffic": false,
+    "scope": "Real Gateway-to-Auth HTTP/H2, seven actual loopback connection peers; monitoring publisher stubbed.",
+    "excluded_predictors": [
+      "scenario",
+      "target",
+      "session_id",
+      "split",
+      "sequence",
+      "status",
+      "duration_ms",
+      "expected_status"
+    ],
+    "feature_source": "Actual gateway pre-request peer history, not client history.",
+    "peer_split": "Three training peers, two calibration peers, two final-test peers; disjoint across partitions.",
+    "feature_version": "gateway-peer-shadow-v2",
+    "token_cases": "Corrupted same-format real JWT signatures, repeated and rotated; legitimate token refresh negative control.",
+    "status": "complete",
+    "splits": {
+      "train": {
+        "rows": 774,
+        "sessions": [
+          {
+            "session_id": "5536e8cd2ecf467b85a21ab823dba992",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "cc74e07242e146348949398911de67c7",
+            "scenario": "invalid_token_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "b8ace192e3504c80bd0818e38e0a6660",
+            "scenario": "normal_mistakes",
+            "requests": 15
+          },
+          {
+            "session_id": "e1bb3e87fbea45b09ec2f753ba8b3e37",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 16
+          },
+          {
+            "session_id": "e7e22a960e2e433bac4fed47674524a0",
+            "scenario": "legitimate_token_refresh",
+            "requests": 16
+          },
+          {
+            "session_id": "c6f03c39a7e841c99ea474d38bb2fddd",
+            "scenario": "normal_use",
+            "requests": 17
+          },
+          {
+            "session_id": "6a2c74a8c66f437bb3aa21faaf22188b",
+            "scenario": "credential_guessing",
+            "requests": 18
+          },
+          {
+            "session_id": "ebf44e9b281a4e76bcfe65c5712c15b0",
+            "scenario": "missing_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "d7ab2779bfdc406e99e155a6b5790f6a",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "aaeaa2c8a3414dfaa5cf1225181d49d7",
+            "scenario": "missing_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "5a763d5402ae480db5d6f5ae823cbc05",
+            "scenario": "credential_guessing",
+            "requests": 13
+          },
+          {
+            "session_id": "cfdf89b9b2084c0fa070d97bc4df8a98",
+            "scenario": "legitimate_token_refresh",
+            "requests": 14
+          },
+          {
+            "session_id": "e2c168726e4c485fb2176ceab15f2d2c",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          },
+          {
+            "session_id": "53824016818a4aa39a589c29f8fc805c",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 13
+          },
+          {
+            "session_id": "8e4a26ecf1a249f0aaa8b72a2fb48ce2",
+            "scenario": "normal_use",
+            "requests": 16
+          },
+          {
+            "session_id": "3cf97a21c27d47b981df72e3312266a5",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "712bc95eb825433e99d5143c96e8ca21",
+            "scenario": "legitimate_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "82868c0f50e54a4697a5616247a0254b",
+            "scenario": "missing_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "662fc60e3655405eae0def198beda036",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 20
+          },
+          {
+            "session_id": "e8cd0363351a42b0ac7acc4acc261a88",
+            "scenario": "legitimate_token_refresh",
+            "requests": 16
+          },
+          {
+            "session_id": "a1ff712d4e2a4ffdb750ddde0c759984",
+            "scenario": "invalid_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "c24d6fcfdf1b4a708ce09a2994eed33e",
+            "scenario": "normal_mistakes",
+            "requests": 13
+          },
+          {
+            "session_id": "c4c48217446942dd916dec894fe918e5",
+            "scenario": "credential_guessing",
+            "requests": 12
+          },
+          {
+            "session_id": "feca450bba0d4dfca4619de9f9d400b9",
+            "scenario": "normal_use",
+            "requests": 12
+          },
+          {
+            "session_id": "7eeb3320c35b45459a4c7a419bafc25c",
+            "scenario": "invalid_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "7e0c1bf2955d478780bc7f2986584c6b",
+            "scenario": "legitimate_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "c3dd342d0e8346ddb27e43a359a8744c",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          },
+          {
+            "session_id": "868ca61189ca4290ae0cd22ef5265bd3",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 17
+          },
+          {
+            "session_id": "858a1f1939764fd0b7a264831e563383",
+            "scenario": "missing_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "145760aa6acf436ba6c150e839039d0a",
+            "scenario": "credential_guessing",
+            "requests": 17
+          },
+          {
+            "session_id": "c35d05cd68c24fc38a86b4f3cbc58bf4",
+            "scenario": "normal_use",
+            "requests": 13
+          },
+          {
+            "session_id": "3a48f28d97e74331b27db8d93eb0a1bc",
+            "scenario": "legitimate_token_refresh",
+            "requests": 16
+          },
+          {
+            "session_id": "58a8bd635b4f49ba8e3e236c1ed6e181",
+            "scenario": "legitimate_burst",
+            "requests": 19
+          },
+          {
+            "session_id": "ed8d36d84fb64d50b26025f404314874",
+            "scenario": "normal_use",
+            "requests": 19
+          },
+          {
+            "session_id": "d99c1f3d658f4002b2dab99d1488fa18",
+            "scenario": "credential_guessing",
+            "requests": 20
+          },
+          {
+            "session_id": "82e90986d21d4172a906a9fc8e990c5c",
+            "scenario": "invalid_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "3f1ee1686561490c93097c13ed69e1b8",
+            "scenario": "legitimate_token_refresh",
+            "requests": 20
+          },
+          {
+            "session_id": "bf371c28a09a4073aecbadee1c5a474a",
+            "scenario": "normal_mistakes",
+            "requests": 14
+          },
+          {
+            "session_id": "fe38a24183a74db0a4e81837eca19ad9",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "6308cfbb2d5d4b4f88fed34bd3b10a81",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 16
+          },
+          {
+            "session_id": "67550037ab8748c29058275e0b15a440",
+            "scenario": "credential_guessing",
+            "requests": 20
+          },
+          {
+            "session_id": "f9ef442ae331446d84ca542201024639",
+            "scenario": "normal_use",
+            "requests": 19
+          },
+          {
+            "session_id": "26a60f0b4eaf40818d10f92ed376be49",
+            "scenario": "missing_token_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "f19350a7c7b64af7b2a1b3dbdfa693e2",
+            "scenario": "normal_mistakes",
+            "requests": 19
+          },
+          {
+            "session_id": "08f1322a55194df8ab2adc05f3c42c07",
+            "scenario": "legitimate_burst",
+            "requests": 13
+          },
+          {
+            "session_id": "4e4d7cfd30194d7ea037bea47fda48ad",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 15
+          },
+          {
+            "session_id": "ad3f4ee041e142dc941845df9b0307f5",
+            "scenario": "invalid_token_burst",
+            "requests": 14
+          },
+          {
+            "session_id": "f8931cbf129c43458d7d6e50451aba4b",
+            "scenario": "legitimate_token_refresh",
+            "requests": 18
+          }
+        ],
+        "sha256": "ac791527b43d341e2d61da86bccf29cb42f38ea9752ee58a6b9d5181e99defa7",
+        "peer_ids": [
+          "2963cd5a-4867-430f-aa86-d6f32ed027d9",
+          "9eac453e-e17d-4c51-b910-c1ca475fbe9c",
+          "e6cfc0ac-ed3e-43eb-a2c5-e9ccfd3cb641"
+        ]
+      },
+      "calibration": {
+        "rows": 268,
+        "sessions": [
+          {
+            "session_id": "0f8083b2689f4e16a3c2760e662be588",
+            "scenario": "legitimate_token_refresh",
+            "requests": 18
+          },
+          {
+            "session_id": "ef8936c4471f4595b95aa4d60222072f",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "02ab4164ff48452283bc23df9a5c7634",
+            "scenario": "invalid_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "8002c388bf2249459cd955aa57328ec1",
+            "scenario": "normal_use",
+            "requests": 20
+          },
+          {
+            "session_id": "343a429bd791499b8907600139d390bd",
+            "scenario": "legitimate_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "369e33b9708543adb43111d61e1cf782",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 12
+          },
+          {
+            "session_id": "adb92f67ca724904b39eca8d99ebc4c1",
+            "scenario": "credential_guessing",
+            "requests": 20
+          },
+          {
+            "session_id": "107a4ab3fc5b4d8e90428d19decc5a29",
+            "scenario": "normal_mistakes",
+            "requests": 18
+          },
+          {
+            "session_id": "58b078d4bc484a18bace1b8100e452f9",
+            "scenario": "normal_use",
+            "requests": 20
+          },
+          {
+            "session_id": "9ceb2dc6e2b24d63a69fe8a543e42f47",
+            "scenario": "legitimate_burst",
+            "requests": 12
+          },
+          {
+            "session_id": "c37eb995badf46dc89e855a411b7571e",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 14
+          },
+          {
+            "session_id": "e0277a55284147379fb9768e0ff82667",
+            "scenario": "invalid_token_burst",
+            "requests": 17
+          },
+          {
+            "session_id": "6e75b2f6c3c74a3aa1723df2aaf83e40",
+            "scenario": "legitimate_token_refresh",
+            "requests": 13
+          },
+          {
+            "session_id": "09f5b701e9b5459c8cd8d8ea56e43143",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "44e06fbc7af44f3486cc61623e5b4814",
+            "scenario": "normal_mistakes",
+            "requests": 14
+          },
+          {
+            "session_id": "b2a61453e01a4b13961eb4ea70c20db6",
+            "scenario": "credential_guessing",
+            "requests": 19
+          }
+        ],
+        "sha256": "640e849292663474cb4ed9a2152e13f32b4e937c6b7798ca9f4211a15a237393",
+        "peer_ids": [
+          "6d2247d1-9dae-4d48-baf1-7060dd7f3d1e",
+          "e5da0d84-b1a6-4d68-94f2-312df5f2b57f"
+        ]
+      },
+      "test": {
+        "rows": 276,
+        "sessions": [
+          {
+            "session_id": "08da67f5152741a6a28cb9bebe250d60",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 19
+          },
+          {
+            "session_id": "62860a9827a64a8783334d30a60a79cb",
+            "scenario": "legitimate_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "4fc0ce61dcb94ed99635750ffbff2daf",
+            "scenario": "normal_mistakes",
+            "requests": 18
+          },
+          {
+            "session_id": "685a1778d9df4871b86504176834b7ed",
+            "scenario": "credential_guessing",
+            "requests": 13
+          },
+          {
+            "session_id": "62c62ea2f6434458b1143866e8933850",
+            "scenario": "invalid_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "13551a70c0b144a7aacd0d20c33bc7d5",
+            "scenario": "normal_use",
+            "requests": 20
+          },
+          {
+            "session_id": "77a35480782144148eec8e15da676f3d",
+            "scenario": "legitimate_token_refresh",
+            "requests": 14
+          },
+          {
+            "session_id": "7ab3c512582d41cdac7dc2589835ba46",
+            "scenario": "missing_token_burst",
+            "requests": 15
+          },
+          {
+            "session_id": "9e30725b65ae4f5a8430dc909523ec90",
+            "scenario": "credential_guessing",
+            "requests": 18
+          },
+          {
+            "session_id": "52ddb51488fd4039ba88d01329e1e13c",
+            "scenario": "normal_use",
+            "requests": 14
+          },
+          {
+            "session_id": "af885c39a82243a582def0845b63ec1d",
+            "scenario": "rotating_invalid_tokens",
+            "requests": 12
+          },
+          {
+            "session_id": "77335ee4d06848029a63368de448c0df",
+            "scenario": "invalid_token_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "bf612f1716b14ae0b00fceeb10fcfeac",
+            "scenario": "missing_token_burst",
+            "requests": 18
+          },
+          {
+            "session_id": "082eb67bdd3047ebb01685612deb3ed6",
+            "scenario": "normal_mistakes",
+            "requests": 16
+          },
+          {
+            "session_id": "8862329ac7974d8cb3b187efb3a29b5c",
+            "scenario": "legitimate_burst",
+            "requests": 20
+          },
+          {
+            "session_id": "683d718e74214c56ad62aa83e4ab2a30",
+            "scenario": "legitimate_token_refresh",
+            "requests": 19
+          }
+        ],
+        "sha256": "98e59f0bdc02b1068b8b2cf802754e6b12020a2ba95402e4fa2e16bbf6f9f2b9",
+        "peer_ids": [
+          "155f2dbf-c5e1-4972-8686-2245df2fa9e4",
+          "5f4eef19-71a7-4de7-8454-e68bfd6c171f"
+        ]
+      }
+    },
+    "setup_http_requests": 160,
+    "elapsed_seconds": 88.11232569999993,
+    "total_http_requests": 1478,
+    "retained_secrets": false,
+    "model_evaluated": false,
+    "raw_manifest_sha256": "4350f024c00314f1ee91a7d38f9d05dc8ac86dc28136dabde212fca2614cf882",
+    "gateway_log_sha256": "03efb0d45f9415d4f833f224124e2948bfd6aeee185be8760e1595c51d84e193",
+    "preparation_sha256": "f42d5bd035b428e0a37455c486d1dc1e512a7f3f835030570b417d0024843d7d",
+    "unique_transport_peers": 7,
+    "joined_study_observations": 1318,
+    "gateway_observations_including_setup": 1398,
+    "cv_group": "trusted_peer_id",
+    "automatic_response_enabled": false
+  },
+  "frozen": {
+    "run_id": "microservice-sessions-rich-v1",
+    "created_utc": "2026-10-19T16:06:05.163446+00:00",
+    "script_sha256": "0a6054d044dd4438dcba15d28d2f833721bbe3f60a5f767e698e55708fffd57a",
+    "manifest_sha256": "f4f0caa85daaad7f8c22f414413d3b746bfbcce5538f5923ac690f749c1e9040",
+    "helper_hashes": {
+      "train_microservice_sessions.py": "a99d2c9fe2bc7bc701b6beacd60ade16097f26b4c043a1edfe26e4eab2ea3ed5",
+      "train_ciciot2023_pilot.py": "b4e4b6ae84953a7df936f92fef8d03d2ffc7e5a7a9dfa36ad9eef2d1f956e380",
+      "evaluate_microservice_sessions.py": "bc429aa3bdd0915341e40f6c9dfc1d92d03e7915e8433c50e4e2cc6fd574688d"
+    },
+    "feature_module_sha256": "78ee653a706271fd883868592f042c5372a1ddab4beb927e0c4f66a35f19182e",
+    "reference_model_sha256": "06a1726d028ef74254fa8a97c452770164fb59dc05a5db173c852ed5ed414696",
+    "reference_frozen_sha256": "784c446cee918d36065f0535ebb0f556b5bc6853f65fa5096fa6c93041fec421",
+    "seed": 20261021,
+    "recipe_names": [
+      "logistic",
+      "rf",
+      "xgb"
+    ],
+    "parameters": {
+      "rf": {
+        "bootstrap": true,
+        "ccp_alpha": 0,
+        "class_weight": "balanced",
+        "criterion": "gini",
+        "max_depth": 8,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0,
+        "min_samples_leaf": 2,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0,
+        "monotonic_cst": null,
+        "n_estimators": 240,
+        "n_jobs": 4,
+        "oob_score": false,
+        "random_state": 20261021,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "xgb": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.85,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": true,
+        "eval_metric": "logloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 4,
+        "max_leaves": null,
+        "min_child_weight": 4,
+        "missing": null,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "num_parallel_tree": null,
+        "random_state": 20261021,
+        "reg_alpha": null,
+        "reg_lambda": 4,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.85,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null
+      },
+      "logistic": {
+        "C": 1,
+        "class_weight": "balanced",
+        "max_iter": 1000,
+        "scaler": "StandardScaler"
+      }
+    },
+    "feature_sets": {
+      "rich": [
+        "is_login",
+        "is_identity_read",
+        "has_bearer",
+        "has_history",
+        "prior_requests_1s",
+        "prior_requests_5s",
+        "prior_401_5s",
+        "prior_failed_login_5s",
+        "seconds_since_previous_start",
+        "context_prior_requests_5s",
+        "context_prior_401_5s",
+        "context_prior_success_5s",
+        "route_prior_requests_5s",
+        "route_prior_401_5s",
+        "route_prior_success_5s",
+        "peer_consecutive_401",
+        "context_consecutive_401",
+        "context_is_new",
+        "context_last_was_401",
+        "route_last_was_401",
+        "peer_last_was_401",
+        "unique_bearer_contexts_5s",
+        "prior_success_5s",
+        "seconds_since_context_start"
+      ],
+      "base": [
+        "is_login",
+        "is_identity_read",
+        "has_bearer",
+        "has_history",
+        "prior_requests_1s",
+        "prior_requests_5s",
+        "prior_401_5s",
+        "prior_failed_login_5s",
+        "seconds_since_previous_start"
+      ]
+    },
+    "selection": "For EACH feature set, select three-model mean partial AUC(max_fpr=.05) on leave-one-training-peer-out CV, then separate calibration and freeze.",
+    "large_improvement_target": "On fresh matched test: rich accuracy >= old peer model accuracy +10 percentage points, recall >= old +20 points; rich FPR <=5%. Report matched feature ablation too.",
+    "strict_quality_gates": "Calibration and fresh test recall >=95%, FPR <=5%. Never automatic production promotion.",
+    "privacy": "Credential-context keys use random per-process HMAC, held only in bounded memory; keys/values/digests not exported as predictors.",
+    "environment": {
+      "python": "3.14.6",
+      "sklearn": "1.9.1",
+      "numpy": "2.5.3",
+      "xgboost": "3.4.1"
+    },
+    "automatic_response_enabled": false,
+    "reserved_test_loaded": false,
+    "production_accuracy_claim": false,
+    "sets": {
+      "rich": {
+        "cv": {
+          "logistic": {
+            "folds": [
+              {
+                "partial_auc": 0.9787984278495228,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.9694656488549618,
+                  "balanced_accuracy": 0.9687007299270073,
+                  "macro_precision": 0.9704589414454019,
+                  "macro_f1": 0.9693513481897409,
+                  "attack_recall": 0.952,
+                  "attack_precision": 0.9834710743801653,
+                  "false_positive_rate": 0.014598540145985401,
+                  "roc_auc": 0.9953868613138687,
+                  "pr_auc": 0.9957167777427409,
+                  "confusion_matrix": [
+                    [
+                      135,
+                      2
+                    ],
+                    [
+                      6,
+                      119
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.9286130536130537,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.9576923076923077,
+                  "balanced_accuracy": 0.9579782196969697,
+                  "macro_precision": 0.958113788408028,
+                  "macro_f1": 0.9576916818296128,
+                  "attack_recall": 0.9765625,
+                  "attack_precision": 0.9398496240601504,
+                  "false_positive_rate": 0.06060606060606061,
+                  "roc_auc": 0.9913589015151515,
+                  "pr_auc": 0.9905340528042151,
+                  "confusion_matrix": [
+                    [
+                      124,
+                      8
+                    ],
+                    [
+                      3,
+                      125
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.9788411064001615,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.9722222222222222,
+                  "balanced_accuracy": 0.9723149606299213,
+                  "macro_precision": 0.9724042338709677,
+                  "macro_f1": 0.9722217847975687,
+                  "attack_recall": 0.9606299212598425,
+                  "attack_precision": 0.9838709677419355,
+                  "false_positive_rate": 0.016,
+                  "roc_auc": 0.9917480314960629,
+                  "pr_auc": 0.993551722719289,
+                  "confusion_matrix": [
+                    [
+                      123,
+                      2
+                    ],
+                    [
+                      5,
+                      122
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.962084195954246
+          },
+          "rf": {
+            "folds": [
+              {
+                "partial_auc": 0.9792176679767921,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.9694656488549618,
+                  "balanced_accuracy": 0.9687007299270073,
+                  "macro_precision": 0.9704589414454019,
+                  "macro_f1": 0.9693513481897409,
+                  "attack_recall": 0.952,
+                  "attack_precision": 0.9834710743801653,
+                  "false_positive_rate": 0.014598540145985401,
+                  "roc_auc": 0.9967883211678832,
+                  "pr_auc": 0.9967518899384934,
+                  "confusion_matrix": [
+                    [
+                      135,
+                      2
+                    ],
+                    [
+                      6,
+                      119
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.975475912975913,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.9615384615384616,
+                  "balanced_accuracy": 0.9615293560606061,
+                  "macro_precision": 0.9615293560606061,
+                  "macro_f1": 0.9615293560606061,
+                  "attack_recall": 0.9609375,
+                  "attack_precision": 0.9609375,
+                  "false_positive_rate": 0.03787878787878788,
+                  "roc_auc": 0.9960345643939394,
+                  "pr_auc": 0.9961844164218789,
+                  "confusion_matrix": [
+                    [
+                      127,
+                      5
+                    ],
+                    [
+                      5,
+                      123
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.9762568140520896,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.9642857142857143,
+                  "balanced_accuracy": 0.9643779527559055,
+                  "macro_precision": 0.9644657258064516,
+                  "macro_f1": 0.9642851518825882,
+                  "attack_recall": 0.952755905511811,
+                  "attack_precision": 0.9758064516129032,
+                  "false_positive_rate": 0.024,
+                  "roc_auc": 0.9956535433070866,
+                  "pr_auc": 0.9961366333394204,
+                  "confusion_matrix": [
+                    [
+                      122,
+                      3
+                    ],
+                    [
+                      6,
+                      121
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.9769834650015983
+          },
+          "xgb": {
+            "folds": [
+              {
+                "partial_auc": 0.9810144113793748,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.9656488549618321,
+                  "balanced_accuracy": 0.9650510948905109,
+                  "macro_precision": 0.9662763466042155,
+                  "macro_f1": 0.9655358891535977,
+                  "attack_recall": 0.952,
+                  "attack_precision": 0.9754098360655737,
+                  "false_positive_rate": 0.021897810218978103,
+                  "roc_auc": 0.9964963503649635,
+                  "pr_auc": 0.9965435448683307,
+                  "confusion_matrix": [
+                    [
+                      134,
+                      3
+                    ],
+                    [
+                      6,
+                      119
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.9695270007770007,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.9423076923076923,
+                  "balanced_accuracy": 0.9424715909090908,
+                  "macro_precision": 0.9423930410083436,
+                  "macro_f1": 0.9423068388585629,
+                  "attack_recall": 0.953125,
+                  "attack_precision": 0.9312977099236641,
+                  "false_positive_rate": 0.06818181818181818,
+                  "roc_auc": 0.9952059659090909,
+                  "pr_auc": 0.9953474349028071,
+                  "confusion_matrix": [
+                    [
+                      123,
+                      9
+                    ],
+                    [
+                      6,
+                      122
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.9762568140520896,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.9603174603174603,
+                  "balanced_accuracy": 0.9604409448818898,
+                  "macro_precision": 0.960673095103044,
+                  "macro_f1": 0.9603149606299213,
+                  "attack_recall": 0.9448818897637795,
+                  "attack_precision": 0.975609756097561,
+                  "false_positive_rate": 0.024,
+                  "roc_auc": 0.9942677165354331,
+                  "pr_auc": 0.995056921631271,
+                  "confusion_matrix": [
+                    [
+                      122,
+                      3
+                    ],
+                    [
+                      7,
+                      120
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.975599408736155
+          }
+        },
+        "selected_model": "rf",
+        "calibration": {
+          "threshold": 0.5000000000000002,
+          "samples": 268,
+          "accuracy": 0.9813432835820896,
+          "balanced_accuracy": 0.9814814814814814,
+          "macro_precision": 0.9818840579710144,
+          "macro_f1": 0.9813409454849266,
+          "attack_recall": 0.9629629629629629,
+          "attack_precision": 1,
+          "false_positive_rate": 0,
+          "roc_auc": 0.9966026176552493,
+          "pr_auc": 0.9969978871905558,
+          "confusion_matrix": [
+            [
+              133,
+              0
+            ],
+            [
+              5,
+              130
+            ]
+          ]
+        },
+        "calibration_eligible": true,
+        "model_sha256": "1eca7393d6222382edc3a6db9c0e90a39c3e27814e99fb89a86c7d506dc20661"
+      },
+      "base": {
+        "cv": {
+          "logistic": {
+            "folds": [
+              {
+                "partial_auc": 0.6500542766236197,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.7938931297709924,
+                  "balanced_accuracy": 0.7948613138686131,
+                  "macro_precision": 0.7943113597948359,
+                  "macro_f1": 0.793845077810806,
+                  "attack_recall": 0.816,
+                  "attack_precision": 0.7669172932330827,
+                  "false_positive_rate": 0.22627737226277372,
+                  "roc_auc": 0.8677956204379562,
+                  "pr_auc": 0.8504326414927297,
+                  "confusion_matrix": [
+                    [
+                      106,
+                      31
+                    ],
+                    [
+                      23,
+                      102
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.5968094405594405,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.7653846153846153,
+                  "balanced_accuracy": 0.7659801136363636,
+                  "macro_precision": 0.7671978119983351,
+                  "macro_f1": 0.7652144305783778,
+                  "attack_recall": 0.8046875,
+                  "attack_precision": 0.7410071942446043,
+                  "false_positive_rate": 0.2727272727272727,
+                  "roc_auc": 0.7974668560606061,
+                  "pr_auc": 0.770195126645881,
+                  "confusion_matrix": [
+                    [
+                      96,
+                      36
+                    ],
+                    [
+                      25,
+                      103
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.6404603270745003,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.7698412698412699,
+                  "balanced_accuracy": 0.7698897637795276,
+                  "macro_precision": 0.7698897637795276,
+                  "macro_f1": 0.7698412698412699,
+                  "attack_recall": 0.7637795275590551,
+                  "attack_precision": 0.776,
+                  "false_positive_rate": 0.224,
+                  "roc_auc": 0.8270866141732284,
+                  "pr_auc": 0.8339229522021515,
+                  "confusion_matrix": [
+                    [
+                      97,
+                      28
+                    ],
+                    [
+                      30,
+                      97
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.6291080147525202
+          },
+          "rf": {
+            "folds": [
+              {
+                "partial_auc": 0.8259554557364777,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.851145038167939,
+                  "balanced_accuracy": 0.8464525547445255,
+                  "macro_precision": 0.8662345679012347,
+                  "macro_f1": 0.8481159420289854,
+                  "attack_recall": 0.744,
+                  "attack_precision": 0.93,
+                  "false_positive_rate": 0.051094890510948905,
+                  "roc_auc": 0.9583065693430657,
+                  "pr_auc": 0.9600508640467283,
+                  "confusion_matrix": [
+                    [
+                      130,
+                      7
+                    ],
+                    [
+                      32,
+                      93
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.5107323232323232,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.75,
+                  "balanced_accuracy": 0.7494081439393939,
+                  "macro_precision": 0.7511472674176053,
+                  "macro_f1": 0.7493734335839599,
+                  "attack_recall": 0.7109375,
+                  "attack_precision": 0.7647058823529411,
+                  "false_positive_rate": 0.21212121212121213,
+                  "roc_auc": 0.7949514678030303,
+                  "pr_auc": 0.7103519097645964,
+                  "confusion_matrix": [
+                    [
+                      104,
+                      28
+                    ],
+                    [
+                      37,
+                      91
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.4994548758328286,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.7658730158730159,
+                  "balanced_accuracy": 0.7666456692913386,
+                  "macro_precision": 0.7766666666666666,
+                  "macro_f1": 0.7639063120285827,
+                  "attack_recall": 0.6692913385826772,
+                  "attack_precision": 0.8333333333333334,
+                  "false_positive_rate": 0.136,
+                  "roc_auc": 0.8190236220472441,
+                  "pr_auc": 0.7515317279856069,
+                  "confusion_matrix": [
+                    [
+                      108,
+                      17
+                    ],
+                    [
+                      42,
+                      85
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.6120475516005431
+          },
+          "xgb": {
+            "folds": [
+              {
+                "partial_auc": 0.8126296088339884,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 262,
+                  "accuracy": 0.8625954198473282,
+                  "balanced_accuracy": 0.8598540145985402,
+                  "macro_precision": 0.867668993496808,
+                  "macro_f1": 0.861228813559322,
+                  "attack_recall": 0.8,
+                  "attack_precision": 0.9009009009009009,
+                  "false_positive_rate": 0.08029197080291971,
+                  "roc_auc": 0.9570802919708029,
+                  "pr_auc": 0.957668251004626,
+                  "confusion_matrix": [
+                    [
+                      126,
+                      11
+                    ],
+                    [
+                      25,
+                      100
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.5781128593628594,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 260,
+                  "accuracy": 0.7653846153846153,
+                  "balanced_accuracy": 0.7655066287878788,
+                  "macro_precision": 0.7654594946446536,
+                  "macro_f1": 0.7653811446914895,
+                  "attack_recall": 0.7734375,
+                  "attack_precision": 0.7557251908396947,
+                  "false_positive_rate": 0.24242424242424243,
+                  "roc_auc": 0.8253136837121212,
+                  "pr_auc": 0.7865115903421573,
+                  "confusion_matrix": [
+                    [
+                      100,
+                      32
+                    ],
+                    [
+                      29,
+                      99
+                    ]
+                  ]
+                }
+              },
+              {
+                "partial_auc": 0.4875429032909348,
+                "default_metrics": {
+                  "threshold": 0.5,
+                  "samples": 252,
+                  "accuracy": 0.7936507936507936,
+                  "balanced_accuracy": 0.7943307086614173,
+                  "macro_precision": 0.8027210884353742,
+                  "macro_f1": 0.7923427991886409,
+                  "attack_recall": 0.7086614173228346,
+                  "attack_precision": 0.8571428571428571,
+                  "false_positive_rate": 0.12,
+                  "roc_auc": 0.8636850393700787,
+                  "pr_auc": 0.7640183870860446,
+                  "confusion_matrix": [
+                    [
+                      110,
+                      15
+                    ],
+                    [
+                      37,
+                      90
+                    ]
+                  ]
+                }
+              }
+            ],
+            "mean_partial_auc": 0.6260951238292609
+          }
+        },
+        "selected_model": "logistic",
+        "calibration": {
+          "threshold": 0.8250000000000003,
+          "samples": 268,
+          "accuracy": 0.667910447761194,
+          "balanced_accuracy": 0.6700918964076858,
+          "macro_precision": 0.757243935309973,
+          "macro_f1": 0.6380301995599059,
+          "attack_recall": 0.37777777777777777,
+          "attack_precision": 0.9107142857142857,
+          "false_positive_rate": 0.03759398496240601,
+          "roc_auc": 0.8945697577276525,
+          "pr_auc": 0.8841186874309458,
+          "confusion_matrix": [
+            [
+              128,
+              5
+            ],
+            [
+              84,
+              51
+            ]
+          ]
+        },
+        "calibration_eligible": false,
+        "model_sha256": "73139588e45d55fa08559f8dfc3272e370cd835fb748e2a70b10e2fc6edaeae3"
+      }
+    }
+  },
+  "final_test": {
+    "run_id": "microservice-sessions-rich-v1",
+    "frozen_sha256": "1b8b69230a718ff91f717fbf9de985cb6d351f7cf294096cdcd21f877dede1bb",
+    "test_rows": 276,
+    "test_sessions": 16,
+    "unseen_peers": 2,
+    "results": {
+      "rich": {
+        "metrics": {
+          "threshold": 0.5000000000000002,
+          "samples": 276,
+          "accuracy": 0.9710144927536232,
+          "balanced_accuracy": 0.9703703703703703,
+          "macro_precision": 0.9731543624161074,
+          "macro_f1": 0.970939720979205,
+          "attack_recall": 0.9407407407407408,
+          "attack_precision": 1,
+          "false_positive_rate": 0,
+          "roc_auc": 0.9980036774363016,
+          "pr_auc": 0.9980077127181296,
+          "confusion_matrix": [
+            [
+              141,
+              0
+            ],
+            [
+              8,
+              127
+            ]
+          ]
+        },
+        "peer_cluster_intervals": {
+          "accuracy": {
+            "lower": 0.9708029197080292,
+            "upper": 0.9712230215827338,
+            "valid_replicates": 500
+          },
+          "attack_recall": {
+            "lower": 0.9402985074626866,
+            "upper": 0.9411764705882353,
+            "valid_replicates": 500
+          },
+          "false_positive_rate": {
+            "lower": 0,
+            "upper": 0,
+            "valid_replicates": 500
+          }
+        },
+        "by_scenario": {
+          "credential_guessing": {
+            "samples": 31,
+            "alert_rate": 0.9354838709677419
+          },
+          "invalid_token_burst": {
+            "samples": 40,
+            "alert_rate": 0.95
+          },
+          "legitimate_burst": {
+            "samples": 40,
+            "alert_rate": 0
+          },
+          "legitimate_token_refresh": {
+            "samples": 33,
+            "alert_rate": 0
+          },
+          "missing_token_burst": {
+            "samples": 33,
+            "alert_rate": 0.9393939393939394
+          },
+          "normal_mistakes": {
+            "samples": 34,
+            "alert_rate": 0
+          },
+          "normal_use": {
+            "samples": 34,
+            "alert_rate": 0
+          },
+          "rotating_invalid_tokens": {
+            "samples": 31,
+            "alert_rate": 0.9354838709677419
+          }
+        }
+      },
+      "base": {
+        "metrics": {
+          "threshold": 0.8250000000000003,
+          "samples": 276,
+          "accuracy": 0.6123188405797102,
+          "balanced_accuracy": 0.6060677698975572,
+          "macro_precision": 0.6596804808604873,
+          "macro_f1": 0.5737728578232568,
+          "attack_recall": 0.31851851851851853,
+          "attack_precision": 0.7413793103448276,
+          "false_positive_rate": 0.10638297872340426,
+          "roc_auc": 0.7516154452324665,
+          "pr_auc": 0.7470525586347515,
+          "confusion_matrix": [
+            [
+              126,
+              15
+            ],
+            [
+              92,
+              43
+            ]
+          ]
+        },
+        "peer_cluster_intervals": {
+          "accuracy": {
+            "lower": 0.5693430656934306,
+            "upper": 0.6546762589928058,
+            "valid_replicates": 500
+          },
+          "attack_recall": {
+            "lower": 0.29411764705882354,
+            "upper": 0.34328358208955223,
+            "valid_replicates": 500
+          },
+          "false_positive_rate": {
+            "lower": 0.05555555555555555,
+            "upper": 0.15942028985507245,
+            "valid_replicates": 500
+          }
+        },
+        "by_scenario": {
+          "credential_guessing": {
+            "samples": 31,
+            "alert_rate": 0
+          },
+          "invalid_token_burst": {
+            "samples": 40,
+            "alert_rate": 0.3
+          },
+          "legitimate_burst": {
+            "samples": 40,
+            "alert_rate": 0.15
+          },
+          "legitimate_token_refresh": {
+            "samples": 33,
+            "alert_rate": 0.09090909090909091
+          },
+          "missing_token_burst": {
+            "samples": 33,
+            "alert_rate": 0.9393939393939394
+          },
+          "normal_mistakes": {
+            "samples": 34,
+            "alert_rate": 0.11764705882352941
+          },
+          "normal_use": {
+            "samples": 34,
+            "alert_rate": 0.058823529411764705
+          },
+          "rotating_invalid_tokens": {
+            "samples": 31,
+            "alert_rate": 0
+          }
+        }
+      },
+      "old_peer_reference": {
+        "metrics": {
+          "threshold": 0.9250000000000004,
+          "samples": 276,
+          "accuracy": 0.605072463768116,
+          "balanced_accuracy": 0.5972419227738377,
+          "macro_precision": 0.7046660769570986,
+          "macro_f1": 0.5411716259703815,
+          "attack_recall": 0.23703703703703705,
+          "attack_precision": 0.8421052631578947,
+          "false_positive_rate": 0.0425531914893617,
+          "roc_auc": 0.7973732597846073,
+          "pr_auc": 0.7838115267554041,
+          "confusion_matrix": [
+            [
+              135,
+              6
+            ],
+            [
+              103,
+              32
+            ]
+          ]
+        },
+        "peer_cluster_intervals": {
+          "accuracy": {
+            "lower": 0.5971223021582733,
+            "upper": 0.6131386861313869,
+            "valid_replicates": 500
+          },
+          "attack_recall": {
+            "lower": 0.208955223880597,
+            "upper": 0.2647058823529412,
+            "valid_replicates": 500
+          },
+          "false_positive_rate": {
+            "lower": 0.041666666666666664,
+            "upper": 0.043478260869565216,
+            "valid_replicates": 500
+          }
+        },
+        "by_scenario": {
+          "credential_guessing": {
+            "samples": 31,
+            "alert_rate": 0
+          },
+          "invalid_token_burst": {
+            "samples": 40,
+            "alert_rate": 0
+          },
+          "legitimate_burst": {
+            "samples": 40,
+            "alert_rate": 0
+          },
+          "legitimate_token_refresh": {
+            "samples": 33,
+            "alert_rate": 0.06060606060606061
+          },
+          "missing_token_burst": {
+            "samples": 33,
+            "alert_rate": 0.9696969696969697
+          },
+          "normal_mistakes": {
+            "samples": 34,
+            "alert_rate": 0.058823529411764705
+          },
+          "normal_use": {
+            "samples": 34,
+            "alert_rate": 0.058823529411764705
+          },
+          "rotating_invalid_tokens": {
+            "samples": 31,
+            "alert_rate": 0
+          }
+        }
+      }
+    },
+    "improvement_vs_old": {
+      "accuracy": 0.3659420289855072,
+      "macro_f1": 0.4297680950088235,
+      "attack_recall": 0.7037037037037037,
+      "false_positive_rate": -0.0425531914893617
+    },
+    "improvement_vs_matched_base": {
+      "accuracy": 0.35869565217391297,
+      "macro_f1": 0.3971668631559482,
+      "attack_recall": 0.6222222222222222,
+      "false_positive_rate": -0.10638297872340426
+    },
+    "large_improvement_target_pass": true,
+    "strict_quality_gates_pass": false,
+    "reserved_test_loaded": true,
+    "promoted": false,
+    "automatic_response_enabled": false,
+    "scope": "Fresh real Gateway-to-Auth/H2, eight controlled scenarios, new seed; not production/unknown-attack or external dataset accuracy.",
+    "limitations": [
+      "One host/generator/run; only two final peers; cluster intervals descriptive only.",
+      "Same-format corrupt JWTs, rotation and legitimate refresh broaden the lab, but are not exhaustive adversarial validation.",
+      "Contexts can be deliberately churned; aggregate history remains, but no evasion-proof or perfect-security claim.",
+      "No current authentication result, token value/digest, account ID or scenario is a predictor."
+    ]
+  }
+}

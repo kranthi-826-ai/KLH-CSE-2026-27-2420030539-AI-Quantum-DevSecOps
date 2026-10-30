@@ -1,0 +1,217 @@
+rule_files: [audit-alerts.yml]
+evaluation_interval: 15s
+tests:
+  - name: adaptive-audit-positive-at-first-scrape-hold-and-process-reset
+    interval: 15s
+    input_series:
+      - series: 'adaptive_security_failure_audit_errors_total{job="ai-pqc-local-java-services",application="business-service",instance="localhost:8082"}'
+        values: '1x4 0x10'
+    alert_rule_test:
+      - {eval_time: 0s, alertname: AdaptiveAuditWriteFailure, exp_alerts: []}
+      - eval_time: 15s
+        alertname: AdaptiveAuditWriteFailure
+        exp_alerts:
+          - exp_labels: {application: business-service, instance: 'localhost:8082', severity: critical}
+            exp_annotations:
+              summary: Adaptive request audit persistence failed
+              description: At least one failure-audit write failed in this process lifetime. Reconcile requests and database records; do not infer successful protection or complete audit coverage. Restart resets this counter, not the incident.
+      - {eval_time: 2m, alertname: AdaptiveAuditWriteFailure, exp_alerts: []}
+
+  - name: adaptive-audit-zero-is-observed-healthy
+    interval: 15s
+    input_series:
+      - series: 'up{job="ai-pqc-compose-java-services",instance="business-service:8082"}'
+        values: '1x20'
+      - series: 'adaptive_security_failure_audit_errors_total{job="ai-pqc-compose-java-services",application="business-service",instance="business-service:8082"}'
+        values: '0x20'
+    alert_rule_test:
+      - {eval_time: 2m, alertname: AdaptiveAuditWriteFailure, exp_alerts: []}
+      - {eval_time: 2m, alertname: AdaptiveAuditMetricUnavailable, exp_alerts: []}
+
+  - name: adaptive-audit-missing-counter-and-unrelated-job-do-not-hide-unknown
+    interval: 15s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8082"}'
+        values: '1x20'
+      - series: 'adaptive_security_failure_audit_errors_total{job="unrelated",instance="localhost:8082"}'
+        values: '0x20'
+    alert_rule_test:
+      - {eval_time: 45s, alertname: AdaptiveAuditMetricUnavailable, exp_alerts: []}
+      - eval_time: 1m
+        alertname: AdaptiveAuditMetricUnavailable
+        exp_alerts:
+          - exp_labels: {job: ai-pqc-local-java-services, instance: 'localhost:8082', severity: warning}
+            exp_annotations: &audit_missing
+              summary: Adaptive audit failure metric is unavailable
+              description: The Business Service scrape succeeds but its audit failure counter is missing or invalid. Audit persistence health is unknown.
+
+  - name: adaptive-audit-nan-counter-is-unknown
+    interval: 15s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8082"}'
+        values: '1x20'
+      - series: 'adaptive_security_failure_audit_errors_total{job="ai-pqc-local-java-services",instance="localhost:8082"}'
+        values: 'NaN NaN NaN NaN NaN NaN NaN NaN NaN'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: AdaptiveAuditMetricUnavailable
+        exp_alerts:
+          - exp_labels: {job: ai-pqc-local-java-services, instance: 'localhost:8082', severity: warning}
+            exp_annotations: *audit_missing
+
+  - name: adaptive-audit-does-not-monitor-other-jobs-or-services
+    interval: 15s
+    input_series:
+      - series: 'up{job="unrelated",instance="localhost:8082"}'
+        values: '1x20'
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8081"}'
+        values: '1x20'
+      - series: 'adaptive_security_failure_audit_errors_total{job="unrelated",instance="localhost:8082"}'
+        values: '5x20'
+    alert_rule_test:
+      - {eval_time: 2m, alertname: AdaptiveAuditWriteFailure, exp_alerts: []}
+      - {eval_time: 2m, alertname: AdaptiveAuditMetricUnavailable, exp_alerts: []}
+
+  - name: healthy-empty-outbox
+    interval: 30s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8081"}'
+        values: '1x10'
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="PENDING"}'
+        values: '0x10'
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="DEAD"}'
+        values: '0x10'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="auth-service",instance="localhost:8081"}'
+        values: '0x10'
+    alert_rule_test:
+      - {eval_time: 4m, alertname: AuditOutboxDeadEvents, exp_alerts: []}
+      - {eval_time: 4m, alertname: AuditOutboxOldPendingEvents, exp_alerts: []}
+      - {eval_time: 4m, alertname: AuditProducerUnavailable, exp_alerts: []}
+      - {eval_time: 4m, alertname: AuditOutboxMetricsUnavailable, exp_alerts: []}
+
+  - name: dead-event-hold-and-resolution
+    interval: 30s
+    input_series:
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="DEAD"}'
+        values: '1x4 0x5'
+    alert_rule_test:
+      - {eval_time: 30s, alertname: AuditOutboxDeadEvents, exp_alerts: []}
+      - eval_time: 1m
+        alertname: AuditOutboxDeadEvents
+        exp_alerts:
+          - exp_labels: {application: auth-service, instance: 'localhost:8081', severity: critical}
+            exp_annotations: &dead_annotations
+              summary: Audit events require operator recovery
+              description: Inspect the producer outbox, correct the cause, preview a DEAD event and replay explicitly. Do not purge failed events.
+      - {eval_time: 3m, alertname: AuditOutboxDeadEvents, exp_alerts: []}
+
+  - name: transient-dead-does-not-fire
+    interval: 30s
+    input_series:
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="DEAD"}'
+        values: '1 0x9'
+    alert_rule_test:
+      - {eval_time: 1m, alertname: AuditOutboxDeadEvents, exp_alerts: []}
+      - {eval_time: 3m, alertname: AuditOutboxDeadEvents, exp_alerts: []}
+
+  - name: old-pending-requires-duration-and-resolves
+    interval: 30s
+    input_series:
+      - series: 'audit_outbox_records{application="business-service",instance="localhost:8082",status="PENDING"}'
+        values: '1x7 0x3'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="business-service",instance="localhost:8082"}'
+        values: '300x11'
+    alert_rule_test:
+      - {eval_time: 1m, alertname: AuditOutboxOldPendingEvents, exp_alerts: []}
+      - eval_time: 2m
+        alertname: AuditOutboxOldPendingEvents
+        exp_alerts:
+          - exp_labels: {application: business-service, instance: 'localhost:8082', severity: warning}
+            exp_annotations: &old_annotations
+              summary: Audit delivery has ageing pending events
+              description: Pending event occurrence age exceeds 120 seconds. Check receiver availability and source clocks; this is not queue residence time.
+      - {eval_time: 4m, alertname: AuditOutboxOldPendingEvents, exp_alerts: []}
+
+  - name: old-age-without-pending-does-not-fire
+    interval: 30s
+    input_series:
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="PENDING"}'
+        values: '0x10'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="auth-service",instance="localhost:8081"}'
+        values: '300x10'
+    alert_rule_test:
+      - {eval_time: 4m, alertname: AuditOutboxOldPendingEvents, exp_alerts: []}
+
+  - name: unavailable-producer-hold-and-recovery
+    interval: 30s
+    input_series:
+      - series: 'up{job="ai-pqc-compose-java-services",instance="auth-service:8081"}'
+        values: '0x3 1x6'
+    alert_rule_test:
+      - {eval_time: 30s, alertname: AuditProducerUnavailable, exp_alerts: []}
+      - eval_time: 1m
+        alertname: AuditProducerUnavailable
+        exp_alerts:
+          - exp_labels: {job: ai-pqc-compose-java-services, instance: 'auth-service:8081', severity: critical}
+            exp_annotations:
+              summary: Audit producer cannot be scraped
+              description: Check the producer and scrape path. Missing metrics must not be interpreted as an empty healthy outbox.
+      - {eval_time: 3m, alertname: AuditProducerUnavailable, exp_alerts: []}
+
+  - name: successful-scrape-with-missing-metrics-is-not-healthy
+    interval: 30s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8081"}'
+        values: '1x10'
+    alert_rule_test:
+      - {eval_time: 30s, alertname: AuditOutboxMetricsUnavailable, exp_alerts: []}
+      - eval_time: 1m
+        alertname: AuditOutboxMetricsUnavailable
+        exp_alerts:
+          - exp_labels: {job: ai-pqc-local-java-services, instance: 'localhost:8081', severity: warning}
+            exp_annotations: &missing_annotations
+              summary: Audit producer metrics are missing or invalid
+              description: The scrape succeeds but required outbox metrics are absent or invalid. Check exporter registration and database access.
+
+  - name: nan-metric-is-invalid-not-empty
+    interval: 30s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8081"}'
+        values: '1x10'
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="PENDING"}'
+        values: 'NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN'
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="DEAD"}'
+        values: '0x10'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="auth-service",instance="localhost:8081"}'
+        values: '0x10'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: AuditOutboxMetricsUnavailable
+        exp_alerts:
+          - exp_labels: {job: ai-pqc-local-java-services, instance: 'localhost:8081', severity: warning}
+            exp_annotations: *missing_annotations
+
+  - name: unrelated-targets-do-not-need-outbox-metrics
+    interval: 30s
+    input_series:
+      - series: 'up{job="ai-pqc-local-java-services",instance="localhost:8091"}'
+        values: '1x10'
+      - series: 'up{job="unrelated-job",instance="unrelated:8081"}'
+        values: '1x10'
+    alert_rule_test:
+      - {eval_time: 3m, alertname: AuditOutboxMetricsUnavailable, exp_alerts: []}
+      - {eval_time: 3m, alertname: AuditProducerUnavailable, exp_alerts: []}
+
+  - name: pending-and-age-must-belong-to-the-same-producer
+    interval: 30s
+    input_series:
+      - series: 'audit_outbox_records{application="auth-service",instance="localhost:8081",status="PENDING"}'
+        values: '1x10'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="auth-service",instance="localhost:8081"}'
+        values: '0x10'
+      - series: 'audit_outbox_records{application="business-service",instance="localhost:8082",status="PENDING"}'
+        values: '0x10'
+      - series: 'audit_outbox_oldest_pending_event_age_seconds{application="business-service",instance="localhost:8082"}'
+        values: '300x10'
+    alert_rule_test:
+      - {eval_time: 4m, alertname: AuditOutboxOldPendingEvents, exp_alerts: []}

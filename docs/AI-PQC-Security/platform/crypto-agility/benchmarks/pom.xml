@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.pqc.security</groupId><artifactId>crypto-agility</artifactId>
+        <version>0.1.0-SNAPSHOT</version><relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>crypto-benchmarks</artifactId>
+    <dependencies>
+        <dependency><groupId>com.pqc.security</groupId><artifactId>crypto-api</artifactId><version>${project.version}</version></dependency>
+        <dependency><groupId>com.pqc.security</groupId><artifactId>crypto-classical</artifactId><version>${project.version}</version></dependency>
+        <dependency><groupId>com.pqc.security</groupId><artifactId>crypto-pqc</artifactId><version>${project.version}</version></dependency>
+        <dependency><groupId>com.pqc.security</groupId><artifactId>crypto-hybrid</artifactId><version>${project.version}</version></dependency>
+        <dependency><groupId>org.openjdk.jmh</groupId><artifactId>jmh-core</artifactId><version>${jmh.version}</version></dependency>
+        <dependency><groupId>org.openjdk.jmh</groupId><artifactId>jmh-generator-annprocess</artifactId><version>${jmh.version}</version><scope>provided</scope></dependency>
+        <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><scope>test</scope></dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.1</version>
+                <executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration>
+                    <finalName>crypto-benchmarks</finalName>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <transformers combine.self="override"><transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>org.openjdk.jmh.Main</mainClass>
+                    </transformer></transformers>
+                </configuration></execution></executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,9 @@
+apiVersion: 1
+providers:
+  - name: AI-PQC Security
+    folder: AI-PQC Security
+    type: file
+    disableDeletion: true
+    editable: false
+    options:
+      path: /var/lib/grafana/dashboards

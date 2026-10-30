@@ -1,0 +1,29 @@
+{
+  "experiment": "socialnetwork-reference-v2",
+  "scope": "bounded-prefix unsupervised syscall reference pilot",
+  "parsed_events": 1500000,
+  "features": 29,
+  "reference_windows": 2977,
+  "calibration_windows": 2191,
+  "calibration_alarms": 109,
+  "normal_check_windows": 2244,
+  "normal_check_alarms": 53,
+  "normal_check_alarm_fraction": 0.023618538324420676,
+  "attack_accuracy": null,
+  "attack_recall": null,
+  "full_dataset_trained": false,
+  "enforcement_enabled": false,
+  "threshold": 0.5524111151667888,
+  "model_sha256": "a283927dda6c9907c51039ec21b10efad56cb8da3c0e477ddc0f981cab98008e",
+  "script_sha256": "a3691bdcca8c202825203fe719338910f849283891f64fe955d59ff74d74326a",
+  "features_sha256": "ad24fbce328c4b57defabcc95cd1fd4d9dd4e18fa2956d3b107a7d0d04de119e",
+  "seconds_preparation_fit_scoring": 7.382506000000149,
+  "tests_passed": 75,
+  "preliminary_v1_status": "preserved; pre-annotation windows invalidate interpreting its alarms as normal FPR",
+  "limitations": [
+    "Reference training contamination not ruled out",
+    "Only first node1 trace prefixes, not full recordings",
+    "Windows and containers within a recording are correlated",
+    "No attack trace evaluation or literature superiority established"
+  ]
+}

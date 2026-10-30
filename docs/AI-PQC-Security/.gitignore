@@ -1,0 +1,45 @@
+# Build and runtime output
+/tmp/
+/output/
+**/target/
+**/bin/
+*.log
+.env
+.env.*
+!.env.example
+.runtime/
+
+# Spring Tools / Eclipse (generated locally)
+.classpath
+.project
+.settings/
+*.launch
+
+# Other editor settings
+.idea/
+*.iml
+.vscode/
+
+# Large ML data and generated model files
+ml/data/raw/
+ml/data/processed/
+ml/artifacts/
+ml/mlruns/
+ml/mlflow.db
+ml/.venv/
+**/__pycache__/
+**/*.pyc
+**/node_modules/
+**/dist/
+ml/models/*.pkl
+ml/models/*.joblib
+ml/models/*.onnx
+ml/models/**/*.pkl
+ml/models/**/*.joblib
+ml/models/**/*.onnx
+ml/models/promoted/
+ml/models/candidates/microservice-sessions-*/
+ml/models/candidates/socialnetwork-*/
+
+# Local research-paper library (tracked through docs/research/papers-manifest.md)
+docs/research/papers/*.pdf

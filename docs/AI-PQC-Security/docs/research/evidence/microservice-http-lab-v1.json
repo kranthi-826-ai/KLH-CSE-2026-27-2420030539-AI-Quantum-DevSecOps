@@ -1,0 +1,262 @@
+{
+  "run_id": "http-lab-f05c44137b2247909322cbd0c5b13e8e",
+  "created_utc": "2026-10-19T14:40:03.271294+00:00",
+  "scope": "Controlled loopback HTTP against actual Auth Service; ephemeral H2; monitoring publisher stubbed.",
+  "production_traffic": false,
+  "model_evaluated": false,
+  "network_flow_features_collected": false,
+  "script_sha256": "22488f3480eedb34830e302c0f973b3d1db266f7b7ef87c7c1cab1cbeaf9d6f1",
+  "python": "3.14.6",
+  "request_count": 22,
+  "elapsed_seconds": 3.190664800000377,
+  "observations": [
+    {
+      "sequence": 0,
+      "method": "POST",
+      "route": "/api/v1/auth/register",
+      "scenario": "setup_registration",
+      "expected_status": 201,
+      "status": 201,
+      "offset_seconds": 0.00026699999943957664,
+      "duration_ms": 988.1202999968082,
+      "matches_expected": true
+    },
+    {
+      "sequence": 1,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "normal_login",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 0.9884908999993058,
+      "duration_ms": 230.1606000000902,
+      "matches_expected": true
+    },
+    {
+      "sequence": 2,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "normal_authenticated",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 1.2187157999978808,
+      "duration_ms": 79.09669999935431,
+      "matches_expected": true
+    },
+    {
+      "sequence": 3,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "normal_authenticated",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 1.3982316999972682,
+      "duration_ms": 27.154699997481657,
+      "matches_expected": true
+    },
+    {
+      "sequence": 4,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "normal_authenticated",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 1.5256866999989143,
+      "duration_ms": 25.407600001926767,
+      "matches_expected": true
+    },
+    {
+      "sequence": 5,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "normal_authenticated",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 1.6515346999985923,
+      "duration_ms": 24.086200002784608,
+      "matches_expected": true
+    },
+    {
+      "sequence": 6,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "normal_authenticated",
+      "expected_status": 200,
+      "status": 200,
+      "offset_seconds": 1.7761180999987118,
+      "duration_ms": 7.727500000328291,
+      "matches_expected": true
+    },
+    {
+      "sequence": 7,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "credential_guess_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 1.8842420999972092,
+      "duration_ms": 66.47560000055819,
+      "matches_expected": true
+    },
+    {
+      "sequence": 8,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "credential_guess_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.001002699998935,
+      "duration_ms": 63.75800000023446,
+      "matches_expected": true
+    },
+    {
+      "sequence": 9,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "credential_guess_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.115357299997413,
+      "duration_ms": 87.49259999967762,
+      "matches_expected": true
+    },
+    {
+      "sequence": 10,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "credential_guess_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.253393799997866,
+      "duration_ms": 62.583499999163905,
+      "matches_expected": true
+    },
+    {
+      "sequence": 11,
+      "method": "POST",
+      "route": "/api/v1/auth/login",
+      "scenario": "credential_guess_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.366344599999138,
+      "duration_ms": 63.076800000999356,
+      "matches_expected": true
+    },
+    {
+      "sequence": 12,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "missing_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.4798335999985284,
+      "duration_ms": 24.82640000016545,
+      "matches_expected": true
+    },
+    {
+      "sequence": 13,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "missing_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.5548280000002705,
+      "duration_ms": 23.361899999144953,
+      "matches_expected": true
+    },
+    {
+      "sequence": 14,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "missing_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.628807199998846,
+      "duration_ms": 3.052600000955863,
+      "matches_expected": true
+    },
+    {
+      "sequence": 15,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "missing_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.682271199999377,
+      "duration_ms": 20.27989999987767,
+      "matches_expected": true
+    },
+    {
+      "sequence": 16,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "missing_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.7528091999993194,
+      "duration_ms": 3.334799999720417,
+      "matches_expected": true
+    },
+    {
+      "sequence": 17,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "invalid_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.8066832999975304,
+      "duration_ms": 21.373299998231232,
+      "matches_expected": true
+    },
+    {
+      "sequence": 18,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "invalid_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.8783642999987933,
+      "duration_ms": 26.9122999998217,
+      "matches_expected": true
+    },
+    {
+      "sequence": 19,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "invalid_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 2.9555191999970702,
+      "duration_ms": 27.331500001309905,
+      "matches_expected": true
+    },
+    {
+      "sequence": 20,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "invalid_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 3.033490800000436,
+      "duration_ms": 28.422999999747844,
+      "matches_expected": true
+    },
+    {
+      "sequence": 21,
+      "method": "GET",
+      "route": "/api/v1/auth/me",
+      "scenario": "invalid_token_probe",
+      "expected_status": 401,
+      "status": 401,
+      "offset_seconds": 3.112374099997396,
+      "duration_ms": 27.34280000004219,
+      "matches_expected": true
+    }
+  ],
+  "limitations": [
+    "Small harness-generated scenarios, not independent real-world attacks.",
+    "No PCAP, network extractor, gateway routing, MySQL, policy or crypto measured in this collection.",
+    "Status, latency and outcome are post-response evidence; exclude from pre-request prediction.",
+    "No passwords, tokens, response bodies or personal identifiers retained."
+  ]
+}

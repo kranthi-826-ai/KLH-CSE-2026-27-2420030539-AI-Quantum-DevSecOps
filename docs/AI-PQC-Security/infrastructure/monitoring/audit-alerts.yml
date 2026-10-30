@@ -1,0 +1,56 @@
+groups:
+  - name: audit-delivery
+    rules:
+      - alert: AdaptiveAuditWriteFailure
+        expr: max by (application, instance) (adaptive_security_failure_audit_errors_total{job=~"ai-pqc-(local|compose)-java-services",instance=~".*:8082"}) > 0
+        for: 15s
+        labels:
+          severity: critical
+        annotations:
+          summary: Adaptive request audit persistence failed
+          description: At least one failure-audit write failed in this process lifetime. Reconcile requests and database records; do not infer successful protection or complete audit coverage. Restart resets this counter, not the incident.
+
+      - alert: AdaptiveAuditMetricUnavailable
+        expr: (up{job=~"ai-pqc-(local|compose)-java-services",instance=~".*:8082"} == 1) unless on (job, instance) (adaptive_security_failure_audit_errors_total >= 0)
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Adaptive audit failure metric is unavailable
+          description: The Business Service scrape succeeds but its audit failure counter is missing or invalid. Audit persistence health is unknown.
+
+      - alert: AuditOutboxDeadEvents
+        expr: max by (application, instance) (audit_outbox_records{status="DEAD"}) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Audit events require operator recovery
+          description: Inspect the producer outbox, correct the cause, preview a DEAD event and replay explicitly. Do not purge failed events.
+
+      - alert: AuditOutboxOldPendingEvents
+        expr: (max by (application, instance) (audit_outbox_oldest_pending_event_age_seconds) > 120) and on (application, instance) (max by (application, instance) (audit_outbox_records{status="PENDING"}) > 0)
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Audit delivery has ageing pending events
+          description: Pending event occurrence age exceeds 120 seconds. Check receiver availability and source clocks; this is not queue residence time.
+
+      - alert: AuditProducerUnavailable
+        expr: up{job=~"ai-pqc-(local|compose)-java-services",instance=~".*:(8081|8082)"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Audit producer cannot be scraped
+          description: Check the producer and scrape path. Missing metrics must not be interpreted as an empty healthy outbox.
+
+      - alert: AuditOutboxMetricsUnavailable
+        expr: (up{job=~"ai-pqc-(local|compose)-java-services",instance=~".*:(8081|8082)"} == 1) unless on (instance) ((audit_outbox_records{status="PENDING"} >= 0) and on (instance) (audit_outbox_records{status="DEAD"} >= 0) and on (instance) (audit_outbox_oldest_pending_event_age_seconds >= 0))
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Audit producer metrics are missing or invalid
+          description: The scrape succeeds but required outbox metrics are absent or invalid. Check exporter registration and database access.

@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - audit-alerts.yml
+
+scrape_configs:
+  - job_name: ai-pqc-compose-java-services
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - discovery-server:8761
+          - api-gateway:8080
+          - auth-service:8081
+          - business-service:8082
+          - security-monitoring-service:8083
+          - adaptive-policy-engine:8091
+  - job_name: ai-pqc-compose-ai-service
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ai-security-service:8090]

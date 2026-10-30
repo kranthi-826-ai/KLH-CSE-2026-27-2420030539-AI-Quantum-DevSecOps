@@ -1,0 +1,35 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/v1/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "username": "brunouser",
+    "password": "Test@1234"
+  }
+}
+
+script:post-response {
+  if (res.status === 200 && res.body.token) {
+    bru.setVar("jwtToken", res.body.token);
+  }
+}
+
+tests {
+  test("login returns a JWT", function () {
+    expect(res.status).to.equal(200);
+    expect(res.body.token).to.be.a("string");
+  });
+}

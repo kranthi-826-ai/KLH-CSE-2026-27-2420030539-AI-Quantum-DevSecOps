@@ -1,0 +1,42 @@
+{
+  "schema": "ciciot2023-frozen-pilot-final-v1",
+  "bounded_study_complete": true,
+  "full_corpus_trained": false,
+  "train_rows": 230242,
+  "test_rows": 54552,
+  "test_benign": 12000,
+  "binary_results": {
+    "random_forest": {
+      "accuracy": 0.8851004546121132,
+      "macro_f1": 0.8535000890622556,
+      "attack_recall": 0.8650592216582065,
+      "false_positive_rate": 0.043833333333333335,
+      "confusion_matrix": [[11474,526],[5742,36810]],
+      "passes_test_security_gates": false,
+      "validation_eligible": false
+    },
+    "xgboost": {
+      "accuracy": 0.9039631910837366,
+      "macro_f1": 0.8680114024178204,
+      "attack_recall": 0.9139875916525663,
+      "false_positive_rate": 0.13158333333333333,
+      "confusion_matrix": [[10421,1579],[3660,38892]],
+      "passes_test_security_gates": false,
+      "validation_eligible": false
+    }
+  },
+  "eight_category_results": {"accuracy": 0.8014004986068338,"macro_f1": 0.7390299864271854},
+  "reserved_test_loaded": true,
+  "final_test_now_exposed": true,
+  "no_test_based_selection": true,
+  "promoted": false,
+  "enforcement_enabled": false,
+  "plan_sha256": "cdeb12f130379cad78470d7abf518de375eac4da054ea8345407aea7bcae091d",
+  "result_sha256": "929c6bdda9fdc477d89955533e2b36548af737735cba503c04f1e7524a76980d",
+  "model_hashes": {
+    "random_forest": "7ac61b15c87f91a234a52d9f3cd43ed9f5338d6d6f974498383651ee7d69c4d0",
+    "xgboost": "b608ed275bc852ab00a1372d20965064398216178eb4ec5400c3885b1a20b57a",
+    "eight_group_xgboost": "7a0eaee60fca1533f2f09aa5fb435fb9e97a14b05daf7aa0ad6cfd9450f3bb35"
+  },
+  "tests_passed": 95
+}

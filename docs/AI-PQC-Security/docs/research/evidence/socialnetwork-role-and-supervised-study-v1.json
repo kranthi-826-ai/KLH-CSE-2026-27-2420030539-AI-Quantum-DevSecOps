@@ -1,0 +1,33 @@
+{
+  "scope": "exposed development only",
+  "training_roles": 25,
+  "calibrated_roles": 13,
+  "uncalibrated_roles": 12,
+  "nginx_training_rows": 453,
+  "training_windows": 14700,
+  "role_profiles": {
+    "normal_check_alarms": 49,
+    "normal_check_windows": 2244,
+    "exposure_alerts": 9,
+    "exposure_windows": 26,
+    "control_alarms": 12,
+    "control_windows": 276,
+    "case_alerts": 7,
+    "cases": 8,
+    "passes_gates": false,
+    "model_sha256": "eda8280bdc4e9f1d9833941111b86f3a2e2b4965a2f49301ad3c57c4cf551348",
+    "plan_sha256": "59bbcf665d64983fbf625591ec0ad5f11fc081c8c275a973b24f0e1d586c53fb"
+  },
+  "supervised_validation": "leave-one-CVE-recording-group-out, eight folds, fixed threshold0.5",
+  "supervised_plan_sha256": "7f5bc877f2db8e9538f17003d40da1029b8da54732e8b8dd1e36de6a575aaee0",
+  "supervised_results": {
+    "logistic": {"tp": 20, "fn": 6, "fp": 2, "tn": 274, "macro_f1": 0.9094724220623501},
+    "random_forest": {"tp": 18, "fn": 8, "fp": 1, "tn": 275, "macro_f1": 0.8919499105545617},
+    "xgboost": {"tp": 17, "fn": 9, "fp": 0, "tn": 276, "macro_f1": 0.8873274468349708}
+  },
+  "selected_candidate": null,
+  "promoted": false,
+  "enforcement_enabled": false,
+  "final_test_consumed": false,
+  "tests_passed": 88
+}

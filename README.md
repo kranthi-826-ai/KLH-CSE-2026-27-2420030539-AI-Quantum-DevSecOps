@@ -8,15 +8,12 @@ In simple terms: **authenticate the user, estimate risk, choose an acceptable cr
 
 The framework supports research into quantum-resilient software migration. It is not a claim of perfect security, a replacement for all cybersecurity controls, or a production-certified product.
 
-## Team
-
-| Member | Role |
+| Roll No. | Name |
 | --- | --- |
-| Yellanki Kranthi Giri Venkata Chary | Student |
-| Morampudi Girish Venkat Sai | Student |
-| Alla Sai Harsha | Student |
-| Billa Venkateshewara Laxmana | Student |
-| Velthuru Vinisha | Project Guide |
+| 2420030539 | YELLANKI KRANTHI GIRI VENKATA CHARY |
+| 2420030031 | MORAMPUDI GIRISH VENKAT SAI |
+| 2420030482 | ALLA SAI HARSHA |
+| 2420090064 | BILLA VENKATESHEWARA LAXMANA |
 
 Department of Computer Science and Engineering, Koneru Lakshmaiah Education Foundation, Bowrampet, Hyderabad-500043, Telangana, India.
 
